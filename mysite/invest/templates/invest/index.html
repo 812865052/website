@@ -204,7 +204,7 @@ var chart = AmCharts.makeChart("chartdiv", {
         "lineThickness": 2,
         "title": "red line",
         "useLineColorForBulletBorder": true,
-        "valueField": "value",
+        "valueField": "value", "company",
         "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
     }],
     "chartScrollbar": {
@@ -248,16 +248,20 @@ var chart = AmCharts.makeChart("chartdiv", {
     },
     "dataProvider": [{
         "date": "2012-07",
-        "value": 13
+        "value": 13,
+        "company": "tencent"
     }, {
         "date": "2012-08",
-        "value": 11
+        "value": 11,
+        "company": "tencent"
     }, {
-        "date": "2012-09",
-        "value": 15
+        "date": "2012-07",
+        "value": 15,
+        "company": "tencent"
     }, {
-        "date": "2013-01",
-        "value": 81
+        "date": "2012-08",
+        "value": 81,
+        "company": "tencent"
     }]
 });
 
