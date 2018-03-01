@@ -16,6 +16,7 @@ from django.core import serializers
 
 def index(request):
     company_list = sharePrice.objects.all()
+    # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
     data = serializers.serialize("json", company_list)
     context = {
         #'company_list': json.dumps(company_list),
