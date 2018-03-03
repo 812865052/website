@@ -44,7 +44,7 @@ def get_name(request):
             # ...
             # redirect to a new URL:
             # return HttpResponseRedirect('/index/')
-            return render(request, 'index_temp.html', {'form': form})
+            return render(request, 'invest/index_temp.html', {'form': form})
 
     # if a GET (or any other method) we'll create a blank form
     else:
