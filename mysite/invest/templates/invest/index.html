@@ -120,6 +120,12 @@
 					</div>
 				</div>
 
+				<form action="/your-name/" method="post">
+    				{% csrf_token %}
+    				{{ form }}
+    				<input type="submit" value="Submit" />
+				</form>
+
 				<div id="chartdiv"></div>
 				<!--div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div-->
 				<h2 class="sub-header">Section title</h2>
@@ -250,7 +256,7 @@ function myFunction() {
                var graph1 = new AmCharts.AmGraph();
                graph1.valueAxis = valueAxis1; // we have to indicate which value axis should be used
                graph1.title = "red line";
-               graph1.valueField = "visits";
+               graph1.valueField = "price1";
                graph1.bullet = "round";
                graph1.hideBulletsCount = 30;
                graph1.bulletBorderThickness = 1;
@@ -260,7 +266,7 @@ function myFunction() {
                var graph2 = new AmCharts.AmGraph();
                graph2.valueAxis = valueAxis2; // we have to indicate which value axis should be used
                graph2.title = "yellow line";
-               graph2.valueField = "hits";
+               graph2.valueField = "price2";
                graph2.bullet = "square";
                graph2.hideBulletsCount = 30;
                graph2.bulletBorderThickness = 1;
@@ -269,7 +275,7 @@ function myFunction() {
                // third graph
                var graph3 = new AmCharts.AmGraph();
                graph3.valueAxis = valueAxis3; // we have to indicate which value axis should be used
-               graph3.valueField = "views";
+               graph3.valueField = "price3";
                graph3.title = "green line";
                graph3.bullet = "triangleUp";
                graph3.hideBulletsCount = 30;
@@ -299,27 +305,34 @@ function myFunction() {
 
            // generate some random data, quite different range
            function generateChartData() {
-               var firstDate = new Date();
-               firstDate.setMonth(firstDate.getMonth() - 50);
+               // var firstDate = new Date();
+               // firstDate.setMonth(firstDate.getMonth() - 50);
 
-               for (var i = 0; i < 50; i++) {
-                   // we create date objects here. In your data, you can have date strings
-                   // and then set format of your dates using chart.dataDateFormat property,
-                   // however when possible, use date objects, as this will speed up chart rendering.
-                   var newDate = new Date(firstDate);
-                   newDate.setMonth(newDate.getMonth() + i);
+               // for (var i = 0; i < 50; i++) {
+               //     // we create date objects here. In your data, you can have date strings
+               //     // and then set format of your dates using chart.dataDateFormat property,
+               //     // however when possible, use date objects, as this will speed up chart rendering.
+               //     var newDate = new Date(firstDate);
+               //     newDate.setMonth(newDate.getMonth() + i);
 
-                   var visits = Math.round(Math.random() * 40) + 100;
-                   var hits = Math.round(Math.random() * 80) + 500;
-                   var views = Math.round(Math.random() * 6000);
+               //     var visits = Math.round(Math.random() * 40) + 100;
+               //     var hits = Math.round(Math.random() * 80) + 500;
+               //     var views = Math.round(Math.random() * 6000);
 
-                   chartData.push({
-                       date: newDate,
-                       visits: visits,
-                       hits: hits,
-                       views: views
-                   });
-               }
+               //     chartData.push({
+               //         date: newDate,
+               //         visits: visits,
+               //         hits: hits,
+               //         views: views
+               //     });
+               // }
+            	var data = {{company_list|safe}};
+				var datalist = [];
+				for(var i=0; i<data.length; i++){
+					if(data[i].fields.data in datalist == false){
+						datalist.push(data[i].fields.data);
+					}
+				}
            }
 
            // this method is called when chart is first inited as we listen for "dataUpdated" event
