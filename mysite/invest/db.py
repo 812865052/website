@@ -50,7 +50,7 @@ def db_query(path, table, kind):
     conn = connect(path)
     cur=conn.cursor()
     t = (kind,table)
-    number = cur.execute("select %s from %s order by id desc", t)
+    number = cur.execute("select %s from %s order by id desc", %t)
     print number
     i = 0
     list = []
