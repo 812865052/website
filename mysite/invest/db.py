@@ -57,7 +57,7 @@ def db_query(path, table, kind):
     while i < number:
         row = cur.fetchone()
         #print row[1]
-        list.append(row[1])
+        list.append(row)
         i = i + 1
     close(cur,conn)
     print list
