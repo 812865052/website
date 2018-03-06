@@ -14,7 +14,7 @@ from django.views import generic
 import json
 from django.core import serializers
 
-from .forms import NameForm
+from .forms import ChooseForm
 
 def index(request):
     company_list = sharePrice.objects.all()
@@ -37,7 +37,7 @@ def get_name(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = NameForm(request.POST)
+        form = ChooseForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -48,7 +48,7 @@ def get_name(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = NameForm()
+        form = ChooseForm()
 
     return render(request, 'index.html', {'form': form})
 
