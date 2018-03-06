@@ -13,13 +13,14 @@ from django.urls import reverse
 from django.views import generic
 import json
 from django.core import serializers
-
+from db import db_query
 from .forms import ChooseForm
 
 def index(request):
     company_list = sharePrice.objects.all()
     # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
     data = serializers.serialize("json", company_list)
+    print db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
     context = {
         #'company_list': json.dumps(company_list),
         'company_list': data,

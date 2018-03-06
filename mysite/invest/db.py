@@ -5,16 +5,16 @@ from .forms import ChooseForm
 from django.db import connections
 import sqlite3
 
-cx = sqlite3.connect("/Users/cengchengpeng/Downloads/django_test/cmdb/db.sqlite3")
-cursor = cx.cursor()
-cursor.execute("""
-... select
-... (select count(1) from ucloud_uhost) as uhost,
-... (select count(1) from ucloud_project) as project,
-... (select count(1) from ucloud_zone) as zone
-... """)
-cursor.description
-columns = [_[0].lower() for _ in cursor.description]
+# cx = sqlite3.connect("/Users/cengchengpeng/Downloads/django_test/cmdb/db.sqlite3")
+# cursor = cx.cursor()
+# cursor.execute("""
+# ... select
+# ... (select count(1) from ucloud_uhost) as uhost,
+# ... (select count(1) from ucloud_project) as project,
+# ... (select count(1) from ucloud_zone) as zone
+# ... """)
+# cursor.description
+# columns = [_[0].lower() for _ in cursor.description]
 
 def connect(path):
     conn=sqlite3.connect(path)
