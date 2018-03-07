@@ -51,7 +51,7 @@ def db_query(path, table, kind):
     cur=conn.cursor()
     t = (kind,table)
     number = cur.execute("select %s from %s order by id desc" %t)
-    temp = number.featchall()
+    temp = number.fetchall()
     i = 0
     list = []
     while i < len(temp):
