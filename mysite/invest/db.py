@@ -51,13 +51,13 @@ def db_query(path, table, kind):
     cur=conn.cursor()
     t = (kind,table)
     number = cur.execute("select %s from %s order by id desc" %t)
-    print number
+    temp = number.featchall()
     i = 0
     list = []
-    while i < number:
-        row = cur.fetchone()
+    while i < len(temp):
+        # row = cur.fetchone()
         #print row[1]
-        list.append(row)
+        list.append(temp[i][1])
         i = i + 1
     close(cur,conn)
     print list
