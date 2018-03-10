@@ -138,14 +138,9 @@
               			<option value="{{o}}">{{o}}</option>
             		{% endfor %}
             		</select>
+            		<button onclick="var el = document.getElementsByTagName('select')[0];
+  					alert(getSelectValues(el));">Show selected values</button>
 
-            		<select id='callbacks2' multiple='multiple'>
-				  	<option value='elem_1'>elem 1</option>
-				  	<option value='elem_2'>elem 2</option>
-				  	<option value='elem_3'>elem 3</option>
-				  	<option value='elem_4'>elem 4</option>
-				  	<option value='elem_100'>elem 100</option>
-					</select>
         		</div>
 
 				<!-- <form action="/index/" method="post">
@@ -215,14 +210,22 @@ $('#callbacks').multiSelect({
         alert("Deselect value: "+values);
       }
     });
-$('#callbacks2').multiSelect({
-      afterSelect: function(values){
-        alert("Select value: "+values);
-      },
-      afterDeselect: function(values){
-        alert("Deselect value: "+values);
-      }
-    });
+function getSelectValues(select) {
+  var result = [];
+  var options = select && select.options;
+  var opt;
+
+  for (var i=0, iLen=options.length; i<iLen; i++) {
+    opt = options[i];
+
+    if (opt.selected) {
+      result.push(opt.value || opt.text);
+    }
+  }
+  console.log(result);
+  return result;
+}
+
            var chart;
            var chartData = [];
 
