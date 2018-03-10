@@ -60,6 +60,7 @@ def compare(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = compareCompany(request.POST)
+        print request.POST.getlist('selectCompany')
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
