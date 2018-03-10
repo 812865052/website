@@ -14,7 +14,7 @@ from django.views import generic
 import json
 from django.core import serializers
 from db import db_query
-from .forms import ChooseForm
+from .forms import ChooseForm, compareCompany
 
 def index(request):
     company_list = sharePrice.objects.all()
@@ -51,6 +51,26 @@ def get_name(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form = ChooseForm()
+
+    return render(request, 'index.html', {'form': form})
+
+
+def compare(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = compareCompany(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            # return HttpResponseRedirect('/index/')
+            return render(request, 'invest/index_temp.html', {'form': form})
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = compareCompany()
 
     return render(request, 'index.html', {'form': form})
 

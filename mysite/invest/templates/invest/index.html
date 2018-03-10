@@ -131,16 +131,17 @@
     					<input type="submit" value="OK">
 					</form>
 				</div>
-				<div class="form-group">
-            		<label for="day">选择公司</label>
-            		<select name="selectCompany" id="callbacks" multiple='multiple'>
-            		{% for o in companylist %}
-              			<option value="{{o}}">{{o}}</option>
-            		{% endfor %}
-            		</select>
-            		<button onclick="var el = document.getElementsByTagName('select')[0];
-  					alert(getSelectValues(el));">Show selected values</button>
-
+				<div>
+					<form action="/invest/compare/" method="post">
+						{% csrf_token %}
+	            		<label for="selectCompany">选择公司:</label>
+	            		<select name="selectCompany" id="selectCompany" multiple='multiple'>
+	            		{% for o in companylist %}
+	              			<option value="{{o}}">{{o}}</option>
+	            		{% endfor %}
+	            		</select>
+	            		<input type="submit" value="对比">
+  					</form>
         		</div>
 
 				<!-- <form action="/index/" method="post">
@@ -202,7 +203,7 @@ function myFunction() {
 	console.log({{company_list|safe}});
 }
 
-$('#callbacks').multiSelect({
+$('#selectCompany').multiSelect({
       afterSelect: function(values){
         alert("Select value: "+values);
       },
