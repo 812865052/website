@@ -10,6 +10,7 @@
 		<title>Dashboard Template for Bootstrap</title>
 		<!-- Bootstrap core CSS -->
 		<link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+		<link href="{% static '/css/multi-select.css' %}" rel="stylesheet">
 		<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 		<!-- Bootstrles for this template -->
 		<link href="{% static '/css/dashboard.css' %}" rel="stylesheet">
@@ -132,7 +133,7 @@
 				</div>
 				<div class="form-group">
             		<label for="day">选择公司</label>
-            		<select class="form-control" name="selectCompany" id="selectCompany">
+            		<select name="selectCompany" id="selectCompany" multiple='multiple'>
             		{% for o in companylist %}
               		<option value="{{o}}">{{o}}</option>
             		{% endfor %}
@@ -145,7 +146,7 @@
     				<input type="submit" value="Submit" />
 				</form> -->
 
-				<div id="chartdiv"></div>
+				<div id="chartdiv" style="width: 100%; height: 400px;"></div>
 				<!--div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div-->
 				<h2 class="sub-header">Section title</h2>
 				<div class="table-responsive">
@@ -179,6 +180,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<!--<script>window.jQuery || document..write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
 	<script src="{% static '/js/bootstrap.min.js' %}"></script>
+	<script src="{% static '/js/jquery.multi-select.js' %}"></script>
 	<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 	<script src="https://www.amcharts.com/lib/3/serial.js"></script>
 	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
@@ -196,6 +198,15 @@ function myFunction() {
 	alert(data[0].fields.company);
 	console.log({{company_list|safe}});
 }
+
+$('#callbacks').multiSelect({
+      afterSelect: function(values){
+        alert("Select value: "+values);
+      },
+      afterDeselect: function(values){
+        alert("Deselect value: "+values);
+      }
+    });
            var chart;
            var chartData = [];
 
