@@ -10,7 +10,7 @@
 		<title>Dashboard Template for Bootstrap</title>
 		<!-- Bootstrap core CSS -->
 		<link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
-		<link href="{% static '/css/multi-select.css' %}" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{% static '/css/multi-select.css' %}">
 		<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 		<!-- Bootstrles for this template -->
 		<link href="{% static '/css/dashboard.css' %}" rel="stylesheet">
@@ -132,7 +132,7 @@
 					</form>
 				</div>
 				<!-- <div class="form-group"> -->
-            		<label for="day">选择公司</label>
+            		<!-- <label for="day">选择公司</label> -->
             		<select name="selectCompany" id="selectCompany" multiple='multiple'>
             		{% for o in companylist %}
               		<option value="{{o}}">{{o}}</option>
