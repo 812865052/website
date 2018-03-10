@@ -66,6 +66,7 @@ def compare(request):
             # ...
             # redirect to a new URL:
             # return HttpResponseRedirect('/index/')
+            print form.cleaned_data['selectCompany']
             return render(request, 'invest/index_temp.html', {'form': form})
 
     # if a GET (or any other method) we'll create a blank form
