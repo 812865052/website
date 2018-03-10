@@ -132,22 +132,23 @@
 					</form>
 				</div>
 				<!-- <div class="form-group"> -->
-            		<!-- <label for="day">选择公司</label> -->
+            		<label for="day">选择公司</label>
             		<select name="selectCompany" id="selectCompany" multiple='multiple'>
             		{% for o in companylist %}
               			<option value="{{o}}">{{o}}</option>
             		{% endfor %}
             		</select>
 
-				  	<select name="selecttest" id='sfa' multiple='multiple'>
             		{% for o in companylist %}
+				  	<select name="selecttest" id='sfa' multiple='multiple'>
 					  	<option value='elem_1'>elem 1</option>
 					  	<option value='elem_2'>elem 2</option>
 					  	<option value='elem_3'>elem 3</option>
 					  	<option value='elem_4'>elem 4</option>
 					  	<option value='elem_100'>elem 100</option>
-				  	{% endfor %}
 					</select>
+					{% endfor %}
+
         		<!-- </div> -->
 
 				<!-- <form action="/index/" method="post">
