@@ -10,7 +10,7 @@ from django.utils import timezone
 
 class sharePrice(models.Model):
     company = models.CharField(max_length=200)
-    data = models.DateTimeField('month')
+    data = models.DateField('month')
     price = models.FloatField(default=0)
     def __str__(self):
         return self.company

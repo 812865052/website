@@ -61,14 +61,14 @@ def compare(request):
         # create a form instance and populate it with data from the request:
         form = compareCompany(request.POST)
         print request.POST.getlist('selectCompany')
+        companylist = request.POST.getlist('selectCompany')
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
             # return HttpResponseRedirect('/index/')
-            print form.cleaned_data['selectCompany']
-            return render(request, 'invest/index_temp.html', {'form': form})
+            return render(request, 'invest/index_temp.html', {'form': companylist})
 
     # if a GET (or any other method) we'll create a blank form
     else:

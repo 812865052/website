@@ -63,6 +63,24 @@ def db_query(path, table, kind):
     print list
     return list
 
+
+def compareData(path, table, company):
+    conn = connect(path)
+    cur=conn.cursor()
+    t = (kind,table)
+    number = cur.execute("select %s from %s order by id desc" %t)
+    temp = number.fetchall()
+    i = 0
+    list = []
+    while i < len(temp):
+        # row = cur.fetchone()
+        #print row[1]
+        list.append(temp[i][1])
+        i = i + 1
+    close(cur,conn)
+    print list
+    return list
+
  
 def openDb(sql, connection_name='default'):
     dbs = connections[connection_name]
