@@ -69,16 +69,13 @@ def db_queryprice(path, table, company, date):
     conn = connect(path)
     cur=conn.cursor()
     t = (table,company, date)
-    print table, company, date
     number = cur.execute("select * from %s where company=? and data=?" % (table), (company,date,))
-    print number
     temp = number.fetchone()
     if(temp==None):
         return 0
     close(cur,conn)
-    print temp
-    print 'price'+ temp[3]
-    return temp[3]
+    print 'price'+ temp[2]
+    return temp[2]
 
 
 def compareData(path, table, company):
