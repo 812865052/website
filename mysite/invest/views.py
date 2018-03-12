@@ -68,7 +68,7 @@ def compare(request):
         day = 8
         table = 'invest_sharePrice'
         path = '/home/website/demo/mysite/db.sqlite3'
-        insertdate(year,month,,data,companylist)
+        insertdate(year,month,data,companylist)
         insertcompany(path,data,table,companylist)
         # check whether it's valid:
         if form.is_valid():
