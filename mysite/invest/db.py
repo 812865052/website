@@ -4,6 +4,8 @@ from django.core import serializers
 from .forms import ChooseForm
 from django.db import connections
 import sqlite3
+import datetime
+from datetime import date
 
 # cx = sqlite3.connect("/Users/cengchengpeng/Downloads/django_test/cmdb/db.sqlite3")
 # cursor = cx.cursor()
