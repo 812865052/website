@@ -137,8 +137,11 @@ def insertdate(year,month,day,data,companylist):
     return data
 
 def insertcompany(path,data,table,companylist):
+    print data
     for i in data:
+        print i
         for company in companylist:
+            print company,type(company)
             i[company] = db_queryprice(path, table, company, i['date'])
     print 'wz' + data
     return data
