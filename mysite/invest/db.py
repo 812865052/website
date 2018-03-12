@@ -73,6 +73,8 @@ def db_queryprice(path, table, company, date):
     number = cur.execute("select * from %s where company=? and data=?" % (table), (company,date,))
     print number
     temp = number.fetchone()
+    if(temp==None):
+        return 0
     close(cur,conn)
     print temp
     print 'price'+ temp[3]
@@ -139,14 +141,10 @@ def insertdate(year,month,day,data,companylist):
     return data
 
 def insertcompany(path,data,table,companylist):
-    print data
     for i in data:
-        print i
         for company in companylist:
-            print company,type(company)
             # db_queryprice(path, table, company, date)
             i[company] = db_queryprice(path, table, company, i['date'])
-    print 'wz' + data
     return data
 
 
