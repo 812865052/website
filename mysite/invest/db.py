@@ -74,7 +74,6 @@ def db_queryprice(path, table, company, date):
     if(temp==None):
         return 0
     close(cur,conn)
-    print 'price'+ temp[2]
     return temp[2]
 
 
