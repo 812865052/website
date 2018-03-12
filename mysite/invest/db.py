@@ -71,6 +71,7 @@ def db_queryprice(path, table, company, date):
     t = (table,company, date)
     print table, company, date
     number = cur.execute("select * from %s where company=? and data=?" % (table), (company,date,))
+    print number
     temp = number.fetchone()
     close(cur,conn)
     print temp
