@@ -70,7 +70,7 @@ def db_queryprice(path, table, company, date):
     cur=conn.cursor()
     t = (table,company, date)
     print table, company, date
-    number = cur.execute("select * from %s where company= and data=%s" %t)
+    number = cur.execute("select * from %s where company=%s and data=%s" %t)
     temp = number.fetchall()
     close(cur,conn)
     print 'price'+ temp[i][3]
