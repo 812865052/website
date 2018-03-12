@@ -127,9 +127,10 @@ def insertdate(year,month,day,data,companylist):
             month = 1
         if (datetime.date.today() > date(year, month, day)):
             dict['date'] = date(year, month, day)
-            dict[companylist[0]] = 0
-            dict[companylist[1]] = 0
-            dict[companylist[2]] = 0
+            i = 0
+            while(i<len(companylist))
+                dict[companylist[i]] = 0
+                i = i + 1
             data.append(dict)
 
     return data
