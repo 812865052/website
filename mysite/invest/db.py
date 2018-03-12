@@ -63,6 +63,16 @@ def db_query(path, table, kind):
     print list
     return list
 
+def db_queryprice(path, table, company, date):
+    conn = connect(path)
+    cur=conn.cursor()
+    t = (table,company, date)
+    number = cur.execute("select * from %s where company=%s and data=%s" %t)
+    temp = number.fetchall()
+    close(cur,conn)
+    print 'price'+ temp[i][3]
+    return temp[i][3]
+
 
 def compareData(path, table, company):
     conn = connect(path)
@@ -104,6 +114,31 @@ def filterCompany(request):
         'company_list': data,
     }
     return render(request, 'invest/index.html', context)
+
+
+def insertdate(year,month,day,data,companylist):
+    while (datetime.date.today() > date(year, month, day)):
+        dict = {}
+        month = month + 1
+        if month > 12:
+            year = year + 1
+            month = 1
+        if (datetime.date.today() > date(year, month, day)):
+            dict['date'] = date(year, month, day)
+            dict[companylist[0]] = 0
+            dict[companylist[1]] = 0
+            dict[companylist[2]] = 0
+            data.append(dict)
+
+    return data
+
+def insertcompany(path,data,table,companylist):
+    for i in data:
+        for company in companylist:
+            i[company] = db_queryprice(path, table, company, i['date'])
+    print 'wz' + data
+    return data
+
 
 
 if __name__ == '__main__':

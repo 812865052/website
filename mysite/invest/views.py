@@ -13,7 +13,7 @@ from django.urls import reverse
 from django.views import generic
 import json
 from django.core import serializers
-from db import db_query
+from db import db_query, insertdate, insertcompany
 from .forms import ChooseForm, compareCompany
 
 def index(request):
@@ -62,6 +62,14 @@ def compare(request):
         form = compareCompany(request.POST)
         print request.POST.getlist('selectCompany')
         companylist = request.POST.getlist('selectCompany')
+        data = []
+        year = 2017
+        month = 2
+        day = 8
+        table = 'invest_sharePrice'
+        path = '/home/website/demo/mysite/db.sqlite3'
+        insertdate(year,month,,data,companylist)
+        insertcompany(path,data,table,companylist)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
