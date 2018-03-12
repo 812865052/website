@@ -69,7 +69,7 @@ def compare(request):
         table = 'invest_sharePrice'
         path = '/home/website/demo/mysite/db.sqlite3'
         insertdate(year,month,day,data,companylist)
-        insertcompany(path,table,data,companylist)
+        insertcompany(path,data,table,companylist)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
