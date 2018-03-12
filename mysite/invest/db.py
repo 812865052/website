@@ -142,6 +142,7 @@ def insertcompany(path,data,table,companylist):
         for company in companylist:
             # db_queryprice(path, table, company, date)
             i[company] = db_queryprice(path, table, company, i['date'])
+    print data
     return data
 
 
