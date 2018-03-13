@@ -46,7 +46,7 @@
 				<div class="sidebar-sticky">
 					<ul class="nav flex-column">
 						<li class="nav-item">
-							<a class="nav-link active" href="/invest/index">
+							<a class="nav-link active" href="/invest">
 								<span data-feather="home"></span>
 								股票对比平台 <span class="sr-only">(current)</span>
 							</a>
@@ -168,17 +168,17 @@
 	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 	<script type="text/javascript">
 function myFunction() {
-	var data = {{company_list|safe}};
-	var datalist = [];
-	for(var i=0; i<data.length; i++){
-		if(data[i].fields.data in datalist == false){
-			datalist.push(data[i]);
-		}
-	}
-	// // alert(datalist);
-	// alert(data[0].fields.company);
-	alert(datalist);
-	// console.log({{company_list|safe}});
+	// var data = {{company_list|safe}};
+	// var datalist = [];
+	// for(var i=0; i<data.length; i++){
+	// 	if(data[i].fields.data in datalist == false){
+	// 		datalist.push(data[i]);
+	// 	}
+	// }
+	// // // alert(datalist);
+	// // alert(data[0].fields.company);
+	// alert(datalist);
+	console.log({{company_list|safe}});
 }
 
 $('#selectCompany').multiSelect({
