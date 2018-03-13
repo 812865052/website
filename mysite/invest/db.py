@@ -26,13 +26,22 @@ def close(cur,conn):
     cur.close()
     conn.close()
 
-def db_insert(databaseName):
-    conn = connect('localhost',3306,'yefei','123456',databaseName)
+def db_insert(path, table, company, date, price):
+    conn = connect(path)
     cur=conn.cursor()
-    sqli="insert into cron_time values(%s,%s-1,%s,%s)"
-    cur.execute(sqli,(msg['r_type'],msg['weekday'],msg['hour'],msg['rid']))
-    conn.commit()
-    close(cur,conn)
+    number = cur.execute("select * from %s where company=? and data=?" % (table), (company,date,))
+    temp = number.fetchone()
+    if(temp==None):
+        cur.execute("insert into %s values(?,?,?)" % (table), (company,date,price,))
+        conn.commit()
+        close(cur,conn)
+        return 'insert ok'
+    elif(temp[2]==price):
+        close(cur,conn)
+        return 'exist already'
+    elif(temp[2]!=price):
+        close(cur,conn)
+        db_update(path, table, company, date, price)
 
 def db_del(databaseName):
     conn = connect('localhost',3306,'yefei','123456',databaseName)
@@ -41,12 +50,21 @@ def db_del(databaseName):
     conn.commit()
     close(cur,conn)
 
-def db_update(databaseName):
-    conn = connect('localhost',3306,'yefei','123456',databaseName)
+def db_update(path, table, company, date, price):
+    conn = connect(path)
     cur=conn.cursor()
-    cur.execute("update cron_time set week_day=%s-1,hour=%s where r_type='%s' AND rid=%s" %(msg['weekday'],msg['hour'],msg['r_type'],msg['rid']))
-    conn.commit()
-    close(cur,conn)
+    number = cur.execute("select * from %s where company=? and data=?" % (table), (company,date,))
+    temp = number.fetchone()
+    if(temp==None):
+        close(cur,conn)
+        return 'no this company and date dbdata'
+    elif(temp[2]==price):
+        close(cur,conn)
+        return 'exist already'
+    elif(temp[2]!=price):
+        cur.execute("update %s set price=? where company=? and data=?" % (table), (price,company,date,))
+        conn.commit()
+        close(cur,conn)
 
 def db_query(path, table, kind):
     conn = connect(path)
@@ -72,7 +90,8 @@ def db_queryprice(path, table, company, date):
     number = cur.execute("select * from %s where company=? and data=?" % (table), (company,date,))
     temp = number.fetchone()
     if(temp==None):
-        return 0
+        close(cur,conn)
+        return 'no this company and date dbdata'
     close(cur,conn)
     return temp[2]
 

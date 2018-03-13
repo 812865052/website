@@ -28,6 +28,18 @@ def index(request):
     }
     return render(request, 'invest/index.html', context)
 
+def data(request):
+    company_list = sharePrice.objects.all()
+    # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
+    data = serializers.serialize("json", company_list)
+    companylist = db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
+    context = {
+        #'company_list': json.dumps(company_list),
+        'company_list': data,
+        'companylist': companylist,
+    }
+    return render(request, 'invest/data.html', context)
+
 # def test(request):
 #     context = {
 #         #'company_list': json.dumps(company_list),
@@ -42,8 +54,7 @@ def adddb(request):
         form = ChooseForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
+            
             # redirect to a new URL:
             # return HttpResponseRedirect('/index/')
             return render(request, 'invest/index_temp.html', {'form': form})
