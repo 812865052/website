@@ -125,10 +125,13 @@
 						{% csrf_token %}
     					<label for="company">Company: </label>
     					<input id="company" type="text" name="company" value="{{ current_company }}">
-    					<!-- <input type="submit" value="OK"> -->
+
     					<label for="date">Date: </label>
     					<input id="date" type="text" name="date" value="{{ current_date }}">
-    					<input type="submit" value="OK">
+
+    					<label for="companyprice">Price: </label>
+    					<input id="companyprice" type="text" name="companyprice" value="{{ current_price }}">
+    					<input type="submit" value="添加数据库">
 					</form>
 				</div>
 				<div>

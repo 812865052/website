@@ -35,7 +35,7 @@ def index(request):
 #     }
 #     return render(request, 'invest/index.html', context)
 
-def get_name(request):
+def adddb(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
