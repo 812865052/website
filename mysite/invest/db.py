@@ -29,7 +29,7 @@ def close(cur,conn):
 def db_insert(path, table, company, date, price):
     conn = connect(path)
     cur=conn.cursor()
-    number = cur.execute("select * from %s where company=? and data=?" % (table), (company,date,))
+    number = cur.execute("select * from %s where company=? and date=?" % (table), (company,date,))
     temp = number.fetchone()
     if(temp==None):
         cur.execute("insert into %s (company,date,price) values(?,?,?)" % (table), (company,date,price,))
@@ -53,7 +53,7 @@ def db_del(databaseName):
 def db_update(path, table, company, date, price):
     conn = connect(path)
     cur=conn.cursor()
-    number = cur.execute("select * from %s where company=? and data=?" % (table), (company,date,))
+    number = cur.execute("select * from %s where company=? and date=?" % (table), (company,date,))
     temp = number.fetchone()
     if(temp==None):
         close(cur,conn)
@@ -62,7 +62,7 @@ def db_update(path, table, company, date, price):
         close(cur,conn)
         return 'exist already'
     elif(temp[2]!=price):
-        cur.execute("update %s set price=? where company=? and data=?" % (table), (price,company,date,))
+        cur.execute("update %s set price=? where company=? and date=?" % (table), (price,company,date,))
         conn.commit()
         close(cur,conn)
 
@@ -87,7 +87,7 @@ def db_queryprice(path, table, company, date):
     conn = connect(path)
     cur=conn.cursor()
     t = (table,company, date)
-    number = cur.execute("select * from %s where company=? and data=?" % (table), (company,date,))
+    number = cur.execute("select * from %s where company=? and date=?" % (table), (company,date,))
     temp = number.fetchone()
     if(temp==None):
         close(cur,conn)
