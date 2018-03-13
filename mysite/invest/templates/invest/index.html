@@ -120,7 +120,7 @@
 						</button>
 					</div>
 				</div>
-				<div>
+				<!-- <div>
 					<form action="/invest/adddb/" method="post">
 						{% csrf_token %}
     					<label for="company">Company: </label>
@@ -133,7 +133,7 @@
     					<input id="companyprice" type="text" name="companyprice" value="{{ current_price }}">
     					<input type="submit" value="添加数据库">
 					</form>
-				</div>
+				</div> -->
 				<div>
 					<form action="/invest/compare/" method="post">
 						{% csrf_token %}
@@ -358,34 +358,34 @@ function getSelectValues(select) {
 
            // generate some random data, quite different range
            function generateChartData() {
-               // var firstDate = new Date();
-               // firstDate.setMonth(firstDate.getMonth() - 50);
+               var firstDate = new Date();
+               firstDate.setMonth(firstDate.getMonth() - 50);
 
-               // for (var i = 0; i < 50; i++) {
-               //     // we create date objects here. In your data, you can have date strings
-               //     // and then set format of your dates using chart.dataDateFormat property,
-               //     // however when possible, use date objects, as this will speed up chart rendering.
-               //     var newDate = new Date(firstDate);
-               //     newDate.setMonth(newDate.getMonth() + i);
+               for (var i = 0; i < 50; i++) {
+                   // we create date objects here. In your data, you can have date strings
+                   // and then set format of your dates using chart.dataDateFormat property,
+                   // however when possible, use date objects, as this will speed up chart rendering.
+                   var newDate = new Date(firstDate);
+                   newDate.setMonth(newDate.getMonth() + i);
 
-               //     var visits = Math.round(Math.random() * 40) + 100;
-               //     var hits = Math.round(Math.random() * 80) + 500;
-               //     var views = Math.round(Math.random() * 6000);
+                   var visits = Math.round(Math.random() * 40) + 100;
+                   var hits = Math.round(Math.random() * 80) + 500;
+                   var views = Math.round(Math.random() * 6000);
 
-               //     chartData.push({
-               //         date: newDate,
-               //         visits: visits,
-               //         hits: hits,
-               //         views: views
-               //     });
-               // }
-            	var data = {{company_list|safe}};
-				var datalist = [];
-				for(var i=0; i<data.length; i++){
-					if(data[i].fields.data in datalist == false){
-						datalist.push(data[i].fields.data);
-					}
-				}
+                   chartData.push({
+                       date: newDate,
+                       visits: visits,
+                       hits: hits,
+                       views: views
+                   });
+               }
+    //         	var data = {{company_list|safe}};
+				// var datalist = [];
+				// for(var i=0; i<data.length; i++){
+				// 	if(data[i].fields.data in datalist == false){
+				// 		datalist.push(data[i].fields.data);
+				// 	}
+				// }
            }
 
            // this method is called when chart is first inited as we listen for "dataUpdated" event
