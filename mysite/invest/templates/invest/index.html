@@ -134,7 +134,9 @@
     					<input type="submit" value="添加数据库">
 					</form>
 				</div> -->
-				<div>
+
+				
+				<!-- <div>
 					<form action="/invest/compare/" method="post">
 						{% csrf_token %}
 	            		<label for="selectCompany">选择公司:</label>
@@ -145,7 +147,7 @@
 	            		</select>
 	            		<input type="submit" value="对比">
   					</form>
-        		</div>
+        		</div> -->
 
 				<!-- <form action="/index/" method="post">
     				{% csrf_token %}
@@ -193,35 +195,35 @@
 	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 	<script type="text/javascript">
-function myFunction() {
-	var data = {{company_list|safe}};
-	var datalist = [];
-	for(var i=0; i<data.length; i++){
-		if(data[i].fields.data in datalist == false){
-			datalist.push(data[i].fields.data);
-		}
-	}
-	// alert(datalist);
-	alert(data[0].fields.company);
-	console.log({{company_list|safe}});
-}
+// function myFunction() {
+// 	var data = {{company_list|safe}};
+// 	var datalist = [];
+// 	for(var i=0; i<data.length; i++){
+// 		if(data[i].fields.data in datalist == false){
+// 			datalist.push(data[i].fields.data);
+// 		}
+// 	}
+// 	// alert(datalist);
+// 	alert(data[0].fields.company);
+// 	console.log({{company_list|safe}});
+// }
 
 
-function getSelectValues(select) {
-  var result = [];
-  var options = select && select.options;
-  var opt;
+// function getSelectValues(select) {
+//   var result = [];
+//   var options = select && select.options;
+//   var opt;
 
-  for (var i=0, iLen=options.length; i<iLen; i++) {
-    opt = options[i];
+//   for (var i=0, iLen=options.length; i<iLen; i++) {
+//     opt = options[i];
 
-    if (opt.selected) {
-      result.push(opt.value || opt.text);
-    }
-  }
-  console.log(result);
-  return result;
-}
+//     if (opt.selected) {
+//       result.push(opt.value || opt.text);
+//     }
+//   }
+//   console.log(result);
+//   return result;
+// }
 
            var chart;
            var chartData = [];
@@ -386,14 +388,14 @@ function getSelectValues(select) {
                // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
                chart.zoomToIndexes(10, 20);
            }
-    $('#selectCompany').multiSelect({
-      // afterSelect: function(values){
-      //   alert("Select value: "+values);
-      // },
-      // afterDeselect: function(values){
-      //   alert("Deselect value: "+values);
-      // }
-    });
+    // $('#selectCompany').multiSelect({
+    //   // afterSelect: function(values){
+    //   //   alert("Select value: "+values);
+    //   // },
+    //   // afterDeselect: function(values){
+    //   //   alert("Deselect value: "+values);
+    //   // }
+    // });
         </script>
 	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 	<!--<script src="../../assets/js/vendor/holder.min.js"></script>-->
