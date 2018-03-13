@@ -136,7 +136,7 @@
 				</div> -->
 
 				
-				<!-- <div>
+				<div>
 					<form action="/invest/compare/" method="post">
 						{% csrf_token %}
 	            		<label for="selectCompany">选择公司:</label>
@@ -147,7 +147,7 @@
 	            		</select>
 	            		<input type="submit" value="对比">
   					</form>
-        		</div> -->
+        		</div>
 
 				<!-- <form action="/index/" method="post">
     				{% csrf_token %}
@@ -195,35 +195,35 @@
 	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 	<script type="text/javascript">
-// function myFunction() {
-// 	var data = {{company_list|safe}};
-// 	var datalist = [];
-// 	for(var i=0; i<data.length; i++){
-// 		if(data[i].fields.data in datalist == false){
-// 			datalist.push(data[i].fields.data);
-// 		}
-// 	}
-// 	// alert(datalist);
-// 	alert(data[0].fields.company);
-// 	console.log({{company_list|safe}});
-// }
+function myFunction() {
+	var data = {{company_list|safe}};
+	var datalist = [];
+	for(var i=0; i<data.length; i++){
+		if(data[i].fields.data in datalist == false){
+			datalist.push(data[i].fields.data);
+		}
+	}
+	// alert(datalist);
+	alert(data[0].fields.company);
+	console.log({{company_list|safe}});
+}
 
 
-// function getSelectValues(select) {
-//   var result = [];
-//   var options = select && select.options;
-//   var opt;
+function getSelectValues(select) {
+  var result = [];
+  var options = select && select.options;
+  var opt;
 
-//   for (var i=0, iLen=options.length; i<iLen; i++) {
-//     opt = options[i];
+  for (var i=0, iLen=options.length; i<iLen; i++) {
+    opt = options[i];
 
-//     if (opt.selected) {
-//       result.push(opt.value || opt.text);
-//     }
-//   }
-//   console.log(result);
-//   return result;
-// }
+    if (opt.selected) {
+      result.push(opt.value || opt.text);
+    }
+  }
+  console.log(result);
+  return result;
+}
 
            var chart;
            var chartData = [];
@@ -304,7 +304,7 @@
                var graph1 = new AmCharts.AmGraph();
                graph1.valueAxis = valueAxis1; // we have to indicate which value axis should be used
                graph1.title = "red line";
-               graph1.valueField = "price1";
+               graph1.valueField = "visits";
                graph1.bullet = "round";
                graph1.hideBulletsCount = 30;
                graph1.bulletBorderThickness = 1;
@@ -314,7 +314,7 @@
                var graph2 = new AmCharts.AmGraph();
                graph2.valueAxis = valueAxis2; // we have to indicate which value axis should be used
                graph2.title = "yellow line";
-               graph2.valueField = "price2";
+               graph2.valueField = "hits";
                graph2.bullet = "square";
                graph2.hideBulletsCount = 30;
                graph2.bulletBorderThickness = 1;
@@ -323,7 +323,7 @@
                // third graph
                var graph3 = new AmCharts.AmGraph();
                graph3.valueAxis = valueAxis3; // we have to indicate which value axis should be used
-               graph3.valueField = "price3";
+               graph3.valueField = "views";
                graph3.title = "green line";
                graph3.bullet = "triangleUp";
                graph3.hideBulletsCount = 30;
@@ -354,14 +354,14 @@
            // generate some random data, quite different range
            function generateChartData() {
                var firstDate = new Date();
-               firstDate.setMonth(firstDate.getMonth() - 50);
+               firstDate.setDate(firstDate.getDate() - 50);
 
                for (var i = 0; i < 50; i++) {
                    // we create date objects here. In your data, you can have date strings
                    // and then set format of your dates using chart.dataDateFormat property,
                    // however when possible, use date objects, as this will speed up chart rendering.
                    var newDate = new Date(firstDate);
-                   newDate.setMonth(newDate.getMonth() + i);
+                   newDate.setDate(newDate.getDate() + i);
 
                    var visits = Math.round(Math.random() * 40) + 100;
                    var hits = Math.round(Math.random() * 80) + 500;
@@ -374,13 +374,6 @@
                        views: views
                    });
                }
-    //         	var data = {{company_list|safe}};
-				// var datalist = [];
-				// for(var i=0; i<data.length; i++){
-				// 	if(data[i].fields.data in datalist == false){
-				// 		datalist.push(data[i].fields.data);
-				// 	}
-				// }
            }
 
            // this method is called when chart is first inited as we listen for "dataUpdated" event
@@ -388,14 +381,14 @@
                // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
                chart.zoomToIndexes(10, 20);
            }
-    // $('#selectCompany').multiSelect({
-    //   // afterSelect: function(values){
-    //   //   alert("Select value: "+values);
-    //   // },
-    //   // afterDeselect: function(values){
-    //   //   alert("Deselect value: "+values);
-    //   // }
-    // });
+    $('#selectCompany').multiSelect({
+      // afterSelect: function(values){
+      //   alert("Select value: "+values);
+      // },
+      // afterDeselect: function(values){
+      //   alert("Deselect value: "+values);
+      // }
+    });
         </script>
 	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 	<!--<script src="../../assets/js/vendor/holder.min.js"></script>-->
