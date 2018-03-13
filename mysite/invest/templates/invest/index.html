@@ -206,14 +206,7 @@ function myFunction() {
 	console.log({{company_list|safe}});
 }
 
-$('#selectCompany').multiSelect({
-      // afterSelect: function(values){
-      //   alert("Select value: "+values);
-      // },
-      // afterDeselect: function(values){
-      //   alert("Deselect value: "+values);
-      // }
-    });
+
 function getSelectValues(select) {
   var result = [];
   var options = select && select.options;
@@ -393,6 +386,14 @@ function getSelectValues(select) {
                // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
                chart.zoomToIndexes(10, 20);
            }
+    $('#selectCompany').multiSelect({
+      // afterSelect: function(values){
+      //   alert("Select value: "+values);
+      // },
+      // afterDeselect: function(values){
+      //   alert("Deselect value: "+values);
+      // }
+    });
         </script>
 	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
 	<!--<script src="../../assets/js/vendor/holder.min.js"></script>-->
