@@ -97,6 +97,10 @@ def compare(request):
         path = '/home/website/demo/mysite/db.sqlite3'
         insertdate(year,month,day,data,companylist)
         insertcompany(path,data,table,companylist) #insertcompany(path,data,table,companylist)
+        company_list = sharePrice.objects.all()
+        # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
+        company_listjson = serializers.serialize("json", company_list)
+        companylist = db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -105,7 +109,8 @@ def compare(request):
             # return HttpResponseRedirect('/index/')
             context = {
                 'data': data,
-                'form': companylist,
+                'company_list': company_listjson,
+                'companylist': companylist,
             }
             return render(request, 'invest/index.html', context)
 

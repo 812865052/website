@@ -353,27 +353,28 @@ function getSelectValues(select) {
 
            // generate some random data, quite different range
            function generateChartData() {
-               var firstDate = new Date();
-               firstDate.setDate(firstDate.getDate() - 50);
+               // var firstDate = new Date();
+               // firstDate.setDate(firstDate.getDate() - 50);
 
-               for (var i = 0; i < 50; i++) {
-                   // we create date objects here. In your data, you can have date strings
-                   // and then set format of your dates using chart.dataDateFormat property,
-                   // however when possible, use date objects, as this will speed up chart rendering.
-                   var newDate = new Date(firstDate);
-                   newDate.setDate(newDate.getDate() + i);
+               // for (var i = 0; i < 50; i++) {
+               //     // we create date objects here. In your data, you can have date strings
+               //     // and then set format of your dates using chart.dataDateFormat property,
+               //     // however when possible, use date objects, as this will speed up chart rendering.
+               //     var newDate = new Date(firstDate);
+               //     newDate.setDate(newDate.getDate() + i);
 
-                   var visits = Math.round(Math.random() * 40) + 100;
-                   var hits = Math.round(Math.random() * 80) + 500;
-                   var views = Math.round(Math.random() * 6000);
+               //     var visits = Math.round(Math.random() * 40) + 100;
+               //     var hits = Math.round(Math.random() * 80) + 500;
+               //     var views = Math.round(Math.random() * 6000);
 
-                   chartData.push({
-                       date: newDate,
-                       visits: visits,
-                       hits: hits,
-                       views: views
-                   });
-               }
+               //     chartData.push({
+               //         date: newDate,
+               //         visits: visits,
+               //         hits: hits,
+               //         views: views
+               //     });
+               // }
+               chartData = {{data|safe}};
            }
 
            // this method is called when chart is first inited as we listen for "dataUpdated" event
