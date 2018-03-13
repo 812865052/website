@@ -32,7 +32,7 @@ def db_insert(path, table, company, date, price):
     number = cur.execute("select * from %s where company=? and data=?" % (table), (company,date,))
     temp = number.fetchone()
     if(temp==None):
-        cur.execute("insert into %s values(?,?,?)" % (table), (company,date,price,))
+        cur.execute("insert into %s (company,date,price) values(?,?,?)" % (table), (company,date,price,))
         conn.commit()
         close(cur,conn)
         return 'insert ok'
