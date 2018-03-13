@@ -170,14 +170,14 @@
 function myFunction() {
 	var data = {{company_list|safe}};
 	var datalist = [];
-	// for(var i=0; i<data.length; i++){
-	// 	if(data[i].fields.data in datalist == false){
-	// 		datalist.push(data[i].fields.data);
-	// 	}
-	// }
+	for(var i=0; i<data.length; i++){
+		if(data[i].fields.data in datalist == false){
+			datalist.push(data[i]);
+		}
+	}
 	// // alert(datalist);
 	// alert(data[0].fields.company);
-	alert({{company_list|safe}});
+	alert(datalist);
 	// console.log({{company_list|safe}});
 }
 
