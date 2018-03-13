@@ -88,7 +88,7 @@ def compare(request):
             # redirect to a new URL:
             # return HttpResponseRedirect('/index/')
             context = {
-                'data' = data,
+                'data': data,
                 'form': companylist,
             }
             return render(request, 'invest/index_temp.html', context)
