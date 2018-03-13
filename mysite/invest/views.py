@@ -40,6 +40,22 @@ def dataoperation(request):
     }
     return render(request, 'invest/data.html', context)
 
+def insert(request,company,date,price):
+    data = []
+    table = 'invest_sharePrice'
+    path = '/home/website/demo/mysite/db.sqlite3'
+    db_insert(path, table, company, date, price)
+    company_list = sharePrice.objects.all()
+    # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
+    data = serializers.serialize("json", company_list)
+    companylist = db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
+    context = {
+        #'company_list': json.dumps(company_list),
+        'company_list': data,
+        'companylist': companylist,
+    }
+    return render(request, 'invest/data.html', context)
+
 # def test(request):
 #     context = {
 #         #'company_list': json.dumps(company_list),
