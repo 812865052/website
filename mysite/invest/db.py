@@ -53,15 +53,11 @@ def db_delete(path, table, company, date):
     if(temp==None):
         close(cur,conn)
         return 'not exist'
-    if(temp[2]==price):
+    else:
         cur.execute("delete from %s where company=? and date=?" % (table), (company,date,))
         conn.commit()
         close(cur,conn)
         return 'delete ok'
-    else:
-        close(cur,conn)
-        print 'delete fail'
-        return 'delete fail'
 
 def db_update(path, table, company, date, price):
     conn = connect(path)
