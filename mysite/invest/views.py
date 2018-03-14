@@ -14,7 +14,7 @@ from django.views import generic
 import json
 from django.core import serializers
 from db import db_query, insertdate, insertcompany, db_insert
-from .forms import addCompanyData, compareCompany
+from .forms import addCompanyData, compareCompany, deleteCompanyData
 
 def index(request):
     company_list = sharePrice.objects.all()
@@ -59,6 +59,43 @@ def insert(request):
             table = 'invest_sharePrice'
             path = '/home/website/demo/mysite/db.sqlite3'
             db_insert(path, table, company, date, price)
+            company_list = sharePrice.objects.all()
+            # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
+            data = serializers.serialize("json", company_list)
+            companylist = db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
+            context = {
+                #'company_list': json.dumps(company_list),
+                'company_list': data,
+                'companylist': companylist,
+            }
+            return render(request, 'invest/index.html', context)
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = addCompanyData()
+
+    return render(request, 'index.html', {'form': form})
+
+
+def delete(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = deleteCompanyData(request.POST)
+        
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            # return HttpResponseRedirect('/index/')
+            company = form.cleaned_data['company']
+            date = form.cleaned_data['date']
+            price = form.cleaned_data['companyprice']
+            data = []
+            table = 'invest_sharePrice'
+            path = '/home/website/demo/mysite/db.sqlite3'
+            db_delete(path, table, company, date, price)
             company_list = sharePrice.objects.all()
             # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
             data = serializers.serialize("json", company_list)

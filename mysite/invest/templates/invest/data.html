@@ -135,6 +135,20 @@
 					</form>
 				</div>
 				<div>
+					<form action="/invest/delete/" method="post">
+						{% csrf_token %}
+    					<label for="company">Company: </label>
+    					<input id="company" type="text" name="company" value="{{ current_company }}">
+
+    					<label for="date">Date: </label>
+    					<input id="date" type="text" name="date" value="{{ current_date }}">
+
+    					<label for="companyprice">Price: </label>
+    					<input id="companyprice" type="text" name="companyprice" value="{{ current_price }}">
+    					<input type="submit" value="删除数据库">
+					</form>
+				</div>
+				<div>
 					<form action="/invest/compare/" method="post">
 						{% csrf_token %}
 	            		<label for="selectCompany">选择公司:</label>

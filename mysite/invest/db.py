@@ -45,12 +45,23 @@ def db_insert(path, table, company, date, price):
         close(cur,conn)
         db_update(path, table, company, date, price)
 
-def db_del(databaseName):
-    conn = connect('localhost',3306,'yefei','123456',databaseName)
+def db_del(path, table, company, date, price):
+    conn = connect(path)
     cur=conn.cursor()
-    cur.execute("delete from cron_time where r_type='%s' AND rid = %s" %(msg['r_type'],msg['rid']))
-    conn.commit()
-    close(cur,conn)
+    number = cur.execute("select * from %s where company=? and date=?" % (table), (company,date,))
+    temp = number.fetchone()
+    if(temp==None):
+        close(cur,conn)
+        return 'not exist'
+    if(temp[2]==price):
+        cur.execute("delete from %s where company=? and date=?" % (table), (company,date,))
+        conn.commit()
+        close(cur,conn)
+        return 'delete ok'
+    else:
+        close(cur,conn)
+        print 'delete fail'
+        return 'delete fail'
 
 def db_update(path, table, company, date, price):
     conn = connect(path)
@@ -79,7 +90,8 @@ def db_query(path, table, kind):
     while i < len(temp):
         # row = cur.fetchone()
         #print row[1]
-        list.append(temp[i][1])
+        if (temp[i][1] in list == False):
+            list.append(temp[i][1])
         i = i + 1
     close(cur,conn)
     print list
