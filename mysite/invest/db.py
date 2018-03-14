@@ -59,6 +59,20 @@ def db_delete(path, table, company, date):
         close(cur,conn)
         return 'delete ok'
 
+def db_deleteid(path, table, companyid):
+    conn = connect(path)
+    cur=conn.cursor()
+    number = cur.execute("select * from %s where id=?" % (table), (companyid,))
+    temp = number.fetchone()
+    if(temp==None):
+        close(cur,conn)
+        return 'not exist'
+    else:
+        cur.execute("delete from %s where id=?" % (table), (companyid,))
+        conn.commit()
+        close(cur,conn)
+        return 'delete ok'
+
 def db_update(path, table, company, date, price):
     conn = connect(path)
     cur=conn.cursor()

@@ -147,6 +147,15 @@
 					</form>
 				</div>
 				<div>
+					<form action="/invest/deleteid/" method="post">
+						{% csrf_token %}
+    					<label for="companyid">Companyid: </label>
+    					<input id="companyid" type="text" name="companyid" value="{{ current_companyid }}">
+
+    					<input type="submit" value="删除数据库">
+					</form>
+				</div>
+				<div>
 					<form action="/invest/compare/" method="post">
 						{% csrf_token %}
 	            		<label for="selectCompany">选择公司:</label>
