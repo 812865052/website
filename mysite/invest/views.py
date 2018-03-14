@@ -97,6 +97,7 @@ def compare(request):
         path = '/home/website/demo/mysite/db.sqlite3'
         insertdate(year,month,day,data,companylist)
         insertcompany(path,data,table,companylist) #insertcompany(path,data,table,companylist)
+        company_list = sharePrice.objects.all()
         
         # check whether it's valid:
         if form.is_valid():
@@ -107,6 +108,7 @@ def compare(request):
             context = {
                 'data': data,
                 'companylist': companylist,
+                'company_list':company_list,
             }
             return render(request, 'invest/index.html', context)
 
