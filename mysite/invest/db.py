@@ -1,7 +1,7 @@
 from .models import sharePrice
 import json
 from django.core import serializers
-from .forms import ChooseForm
+from .forms import addCompanyData
 from django.db import connections
 import sqlite3
 import datetime
