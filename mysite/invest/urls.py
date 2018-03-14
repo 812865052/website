@@ -13,6 +13,7 @@ urlpatterns = [
         url(r'^data/$', views.dataoperation, name='dataoperation'),
         url(r'^insert/$', views.insert, name='insert'),
         url(r'^delete/$', views.delete, name='delete'),
+        url(r'^deleteid/$', views.deleteid, name='deleteid'),
         # ex: /polls/5/
         #url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
         # ex: /polls/5/results/
