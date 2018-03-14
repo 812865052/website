@@ -74,7 +74,7 @@ def insert(request):
     else:
         form = addCompanyData()
 
-    return render(request, 'index.html', {'form': form})
+    return render(request, 'invest/index.html', {'form': form})
 
 
 def delete(request):
@@ -104,13 +104,13 @@ def delete(request):
                 'company_list': data,
                 'companylist': companylist,
             }
-            return render(request, 'index.html', context)
+            return render(request, 'invest/index.html', context)
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = addCompanyData()
 
-    return render(request, 'index.html', {'form': form})
+    return render(request, 'invest/index.html', {'form': form})
 
     
 
