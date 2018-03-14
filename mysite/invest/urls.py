@@ -11,7 +11,7 @@ urlpatterns = [
         url(r'^adddb/$', views.adddb, name='adddb'),
         url(r'^compare/$', views.compare, name='compare'),
         url(r'^data/$', views.dataoperation, name='dataoperation'),
-        url(r'^insert/(?P<company>.*)(?P<date>.*)(?P<price>.*)$', views.insert, name='insert'),
+        url(r'^insert/$', views.insert, name='insert'),
         # ex: /polls/5/
         #url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
         # ex: /polls/5/results/
