@@ -91,11 +91,10 @@ def delete(request):
             # return HttpResponseRedirect('/index/')
             company = form.cleaned_data['company']
             date = form.cleaned_data['date']
-            price = form.cleaned_data['companyprice']
             data = []
             table = 'invest_sharePrice'
             path = '/home/website/demo/mysite/db.sqlite3'
-            db_delete(path, table, company, date, price)
+            db_delete(path, table, company, date)
             company_list = sharePrice.objects.all()
             # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
             data = serializers.serialize("json", company_list)
@@ -105,7 +104,7 @@ def delete(request):
                 'company_list': data,
                 'companylist': companylist,
             }
-            return render(request, 'invest/index.html', context)
+            return render(request, 'index.html', context)
 
     # if a GET (or any other method) we'll create a blank form
     else:

@@ -45,7 +45,7 @@ def db_insert(path, table, company, date, price):
         close(cur,conn)
         db_update(path, table, company, date, price)
 
-def db_del(path, table, company, date, price):
+def db_del(path, table, company, date):
     conn = connect(path)
     cur=conn.cursor()
     number = cur.execute("select * from %s where company=? and date=?" % (table), (company,date,))
