@@ -21,6 +21,8 @@ def index(request):
     # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
     data = serializers.serialize("json", company_list)
     companylist = db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
+    print companylist
+    print 'index'
     context = {
         #'company_list': json.dumps(company_list),
         'company_list': data,
