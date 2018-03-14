@@ -31,6 +31,8 @@ def db_insert(path, table, company, date, price):
     cur=conn.cursor()
     number = cur.execute("select * from %s where company=? and date=?" % (table), (company,date,))
     temp = number.fetchone()
+    print company,date,price
+    print type(company),type(date),type(price)
     if(temp==None):
         cur.execute("insert into %s (company,date,price) values(?,?,?)" % (table), (company,date,price,))
         conn.commit()
@@ -91,7 +93,8 @@ def db_queryprice(path, table, company, date):
     temp = number.fetchone()
     if(temp==None):
         close(cur,conn)
-        return 'no this company and date dbdata'
+        print 'no this company and date dbdata'
+        return 0
     close(cur,conn)
     return temp[2]
 
