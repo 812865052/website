@@ -97,7 +97,7 @@ def compare(request):
         path = '/home/website/demo/mysite/db.sqlite3'
         insertdate(year,month,day,data,companylist)
         insertcompany(path,data,table,companylist) #insertcompany(path,data,table,companylist)
-        company_list = sharePrice.objects.all()
+        company_list = serializers.serialize("json", sharePrice.objects.all())
         
         # check whether it's valid:
         if form.is_valid():
