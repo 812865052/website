@@ -13,7 +13,7 @@ from django.urls import reverse
 from django.views import generic
 import json
 from django.core import serializers
-from db import db_query, insertdate, insertcompany, db_insert
+from db import db_query, insertdate, insertcompany, db_insert, db_delete
 from .forms import addCompanyData, compareCompany, deleteCompanyData
 
 def index(request):
