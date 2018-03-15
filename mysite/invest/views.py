@@ -197,6 +197,7 @@ def compare(request):
             # ...
             # redirect to a new URL:
             # return HttpResponseRedirect('/index/')
+            print 'chart html'
             context = {
                 'data': data,
                 'companylist': companylist,
@@ -208,4 +209,5 @@ def compare(request):
     else:
         form = compareCompany()
 
+    print 'form is not valid'
     return render(request, 'index.html', {'form': form})
