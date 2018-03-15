@@ -180,7 +180,7 @@ def compare(request):
         # create a form instance and populate it with data from the request:
         form = compareCompany(request.POST)
         print request.POST.getlist('selectCompany')
-        companylist = request.POST.getlist('selectCompany')
+        companylist = request.POST.getlist('selectCompany').encode('ascii','ignore')
         data = []
         year = 2017
         month = 2
