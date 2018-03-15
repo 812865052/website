@@ -120,21 +120,6 @@
 						</button>
 					</div>
 				</div>
-				<!-- <div>
-					<form action="/invest/adddb/" method="post">
-						{% csrf_token %}
-    					<label for="company">Company: </label>
-    					<input id="company" type="text" name="company" value="{{ current_company }}">
-
-    					<label for="date">Date: </label>
-    					<input id="date" type="text" name="date" value="{{ current_date }}">
-
-    					<label for="companyprice">Price: </label>
-    					<input id="companyprice" type="text" name="companyprice" value="{{ current_price }}">
-    					<input type="submit" value="添加数据库">
-					</form>
-				</div> -->
-
 				
 				<div>
 					<form action="/invest/compare/" method="post">
@@ -145,41 +130,13 @@
 	              			<option value="{{o}}">{{o}}</option>
 	            		{% endfor %}
 	            		</select>
-	            		<input type="submit" value="对比">
+	            		<input type="submit" value="查看">
   					</form>
         		</div>
-
-				<!-- <form action="/index/" method="post">
-    				{% csrf_token %}
-    				{{ form }}
-    				<input type="submit" value="Submit" />
-				</form> -->
 
 				<div id="chartdiv" style="width: 100%; height: 400px;"></div>
 				<!--div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div-->
 				<h2 class="sub-header">Section title</h2>
-				<div class="table-responsive">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Header</th>
-								<th>Header</th>
-								<th>Header</th>
-								<th>Header</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1001</td>
-								<td>Lorem</td>
-								<td>ipsum</td>
-								<td>dolor</td>
-								<td>sit</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -224,113 +181,6 @@ function getSelectValues(select) {
   console.log(result);
   return result;
 }
-
-  //  var chart;
-  //  var chartData = [];
-
-  //  AmCharts.ready(function () {
-  //      // generate some random data first
-  //      generateChartData();
-
-  //      // SERIAL CHART
-  //      chart = new AmCharts.AmSerialChart();
-
-  //      chart.dataProvider = chartData;
-  //      chart.categoryField = "date";
-
-  //      // listen for "dataUpdated" event (fired when chart is inited) and call zoomChart method when it happens
-  //      chart.addListener("dataUpdated", zoomChart);
-
-  //      chart.synchronizeGrid = true; // this makes all axes grid to be at the same intervals
-
-  //      // AXES
-  //      // category
-  //      var categoryAxis = chart.categoryAxis;
-  //      categoryAxis.parseDates = true; // as our data is date-based, we set parseDates to true
-  //      // categoryAxis.minPeriod = "DD"; // our data is daily, so we set minPeriod to DD
-  //      categoryAxis.minorGridEnabled = true;
-  //      categoryAxis.axisColor = "#DADADA";
-  //      categoryAxis.twoLineMode = true;
-
-  //      var color = ["#9C27B0","#D32F2F","#2196F3","#673AB7","#009688","#CDDC39","#795548"];
-  //      var bullet = [ "round", "square", "triangleUp", "triangleDown", "bubble", "custom"];
-
-  //      var datalist = {{companylist|safe}};
-		// for(var i=0; i<datalist.length; i++){
-		// 	if(i%2==0){
-		// 		var valueAxis1 = new AmCharts.ValueAxis();
-		// 		if(i !=0 ){
-		// 			valueAxis1.offset = 50; // this line makes the axis to appear detached from plot area
-  //      				valueAxis1.gridAlpha = 0;
-		// 		}
-		//        	valueAxis1.axisColor = color[i];
-		//        	valueAxis1.axisThickness = 2;
-		//        	chart.addValueAxis(valueAxis1);
-
-		//        	// GRAPHS
-		//        	var graph1 = new AmCharts.AmGraph();
-	 //       		graph1.valueAxis = valueAxis1; // we have to indicate which value axis should be used
-		//        	graph1.title = datalist[i];
-		//        	graph1.valueField = datalist[i];
-		//        	graph1.bullet = bullet[i];
-		//        	graph1.hideBulletsCount = 30;
-		//        	graph1.bulletBorderThickness = 1;
-		//        	chart.addGraph(graph1);
-		// 	}
-		// 	else{
-		// 		var valueAxis2 = new AmCharts.ValueAxis();
-		//        	valueAxis2.position = "right"; // this line makes the axis to appear on the right
-		//        	valueAxis2.axisColor = color[i];
-		//        	if(i>1){
-		//        		valueAxis2.offset = 50;
-		//        	}
-		//        	valueAxis2.gridAlpha = 0;
-		//        	valueAxis2.axisThickness = 2;
-		//        	chart.addValueAxis(valueAxis2);
-
-		//        	// GRAPHS
-		//        	var graph2 = new AmCharts.AmGraph();
-		//        	graph2.valueAxis = valueAxis2; // we have to indicate which value axis should be used
-		//        	graph2.title = datalist[i];
-		//        	graph2.valueField = datalist[i];
-		//        	graph2.bullet = bullet[i];
-		//        	graph2.hideBulletsCount = 30;
-		//        	graph2.bulletBorderThickness = 1;
-		//        	chart.addGraph(graph2);
-		// 	}
-		// }
-
-  //      // CURSOR
-  //      var chartCursor = new AmCharts.ChartCursor();
-  //      chartCursor.cursorAlpha = 0.1;
-  //      chartCursor.fullWidth = true;
-  //      chartCursor.valueLineBalloonEnabled = true;
-  //      chart.addChartCursor(chartCursor);
-
-  //      // SCROLLBAR
-  //      var chartScrollbar = new AmCharts.ChartScrollbar();
-  //      chart.addChartScrollbar(chartScrollbar);
-
-  //      // LEGEND
-  //      var legend = new AmCharts.AmLegend();
-  //      legend.marginLeft = 110;
-  //      legend.useGraphSettings = true;
-  //      chart.addLegend(legend);
-
-  //      // WRITE
-  //      chart.write("chartdiv");
-  //  });
-
-  //  // generate some random data, quite different range
-  //  function generateChartData() {
-  //      chartData = {{data|safe}};
-  //  }
-
-  //  // this method is called when chart is first inited as we listen for "dataUpdated" event
-  //  function zoomChart() {
-  //      // different zoom methods can be used - zoomToIndexes, zoomToDates, zoomToCategoryValues
-  //      chart.zoomToIndexes(10, 20);
-  //  }
     $('#selectCompany').multiSelect({
       // afterSelect: function(values){
       //   alert("Select value: "+values);
