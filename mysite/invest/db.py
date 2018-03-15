@@ -180,7 +180,7 @@ def insertdate(year,month,day,data,companylist):
             year = year + 1
             month = 1
         if (datetime.date.today() > date(year, month, day)):
-            dict['date'] = date(year, month, day)
+            dict['date'] = date(year, month, day).strftime("%Y-%m-%d")
             i = 0
             while(i<len(companylist)):
                 dict[companylist[i]] = 0
