@@ -202,7 +202,7 @@ def compare(request):
                 'companylist': companylist,
                 'company_list':company_list,
             }
-            return render(request, 'invest/index.html', context)
+            return render(request, 'invest/chart.html', context)
 
     # if a GET (or any other method) we'll create a blank form
     else:
