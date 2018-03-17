@@ -201,9 +201,9 @@ $(document).ready(function() {
       var file_name='';  
       $('#file_upload').uploadify({  
         'uploader'  : '/upload_script/',//根据文件存放地址改变  
-        'swf' : '/static/js/uploadify/uploadify.swf',
+        'swf' : '/static/uploadify/uploadify.swf',
         //'script'    : '/upload_script/',  
-        'cancelImg' : '/static/js/uploadify/uploadify-cancel.png',//根据文件存放地址改变  
+        'cancelImg' : '/static/uploadify/uploadify-cancel.png',//根据文件存放地址改变  
         'folder'    : '/upload',  
         'auto'      : true,//false,//  
         'multi': true,//设置可以上传多个文件  
@@ -211,7 +211,7 @@ $(document).ready(function() {
         'buttonText':'文件上传',     
         'removeCompleted':false,//  
         'fileSizeLimit':10240000,//设置上传文件大小单位kb  
-        'fileTypeExts':'*.txt',//设置上传文件类型为常用文档格式  
+        'fileTypeExts':'*.xlsx',//设置上传文件类型为常用文档格式  
         'fileTypeDesc':'支持文档格式',                  
         // 'onInit': function () {},  
         // 'onError' : function (event,ID,fileObj,errorObj) {  
