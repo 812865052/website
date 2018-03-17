@@ -6,7 +6,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 */
 
 // Define a destination
-$targetFolder = '/uploads'; // Relative to the root
+$targetFolder = '/home/uploads'; // Relative to the root
 
 $verifyToken = md5('unique_salt' . $_POST['timestamp']);
 
@@ -16,7 +16,7 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
 	$targetFile = rtrim($targetPath,'/') . '/' . $_FILES['Filedata']['name'];
 	
 	// Validate the file type
-	$fileTypes = array('jpg','jpeg','gif','png'); // File extensions
+	$fileTypes = array('jpg','jpeg','gif','png','xlsx'); // File extensions
 	$fileParts = pathinfo($_FILES['Filedata']['name']);
 	
 	if (in_array($fileParts['extension'],$fileTypes)) {
