@@ -205,7 +205,7 @@ $(document).ready(function() {
         'swf' : '/static/uploadify/uploadify.swf',
         //'script'    : '/upload_script/',  
         'cancelImg' : '/static/uploadify/uploadify-cancel.png',//根据文件存放地址改变  
-        'folder'    : '/upload',  
+        // 'folder'    : '/upload',  
         'auto'      : true,//false,//  
         'multi': true,//设置可以上传多个文件  
         'queueSizeLimit' : 30,  
@@ -214,21 +214,21 @@ $(document).ready(function() {
         'fileSizeLimit':10240000,//设置上传文件大小单位kb  
         'fileTypeExts':'*.xlsx',//设置上传文件类型为常用文档格式  
         'fileTypeDesc':'支持文档格式',                  
-        // 'onInit': function () {},  
-        // 'onError' : function (event,ID,fileObj,errorObj) {  
-        //         $('#id_span_msg').html("上传失败，错误码:"+errorObj.type+" "+errorObj.info);  
-        //     },  
-        // 'onSelect': function (e, queueId, fileObj) {  
-        //     $('#id_span_msg').html("");  
-        // },  
-        // 'onCancel'    : function(event,ID,fileObj,data) {  
-        //   $.post("/delete_uploadfile/", { delete_file: file_name } );  
-        //   file_name='';  
-        // },  
-        // 'onComplete': function(event, ID, fileObj, response, data) {  
-        //     var result = eval ("(" + response + ")");  
-        //     file_name=result.save_name;  
-        // }
+        'onInit': function () {},  
+        'onError': function (event,ID,fileObj,errorObj) {  
+                $('#id_span_msg').html("上传失败，错误码:"+errorObj.type+" "+errorObj.info);  
+            },  
+        'onSelect': function (e, queueId, fileObj) {  
+            $('#id_span_msg').html("");  
+        },  
+        'onCancel': function(event,ID,fileObj,data) {  
+          $.post("/delete_uploadfile/", { delete_file: file_name } );  
+          file_name='';  
+        },  
+        'onComplete': function(event, ID, fileObj, response, data) {  
+            var result = eval ("(" + response + ")");  
+            file_name=result.save_name;  
+        }
         'onUploadSuccess' : function(file, data, response) {
         	alert('The file was saved to: ' + data);
         }
