@@ -228,6 +228,9 @@ $(document).ready(function() {
         //     var result = eval ("(" + response + ")");  
         //     file_name=result.save_name;  
         // }
+        'onUploadSuccess' : function(file, data, response) {
+        	alert('The file was saved to: ' + data);
+
       });  
     });
 
