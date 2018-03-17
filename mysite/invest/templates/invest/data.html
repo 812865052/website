@@ -15,6 +15,8 @@
 		<!-- Bootstrles for this template -->
 		<link href="{% static '/css/dashboard.css' %}" rel="stylesheet">
 		<link href="{% static '/css/amchart.css' %}" rel="stylesheet">
+		<link href="{% static "uploadify" %}/uploadify.css" rel="stylesheet">
+
 
 		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -168,6 +170,12 @@
   					</form>
         		</div>
 
+        		<div class="demo-box">  
+            		<input id="file_upload" type="file" name="Filedata">  
+            		<div id="file_uploadQueue" class="uploadifyQueue"></div>  
+            		<p><span id="id_span_msg"></span></p>  
+        		</div> 
+
 				<!-- <form action="/index/" method="post">
     				{% csrf_token %}
     				{{ form }}
@@ -187,20 +195,41 @@
 	<script src="https://www.amcharts.com/lib/3/serial.js"></script>
 	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+	<script src="{% static "uploadify" %}/jquery.uploadify.js"></script>
 	<script type="text/javascript">
-function myFunction() {
-	// var data = {{company_list|safe}};
-	// var datalist = [];
-	// for(var i=0; i<data.length; i++){
-	// 	if(data[i].fields.data in datalist == false){
-	// 		datalist.push(data[i]);
-	// 	}
-	// }
-	// // // alert(datalist);
-	// // alert(data[0].fields.company);
-	// alert(datalist);
-	console.log({{company_list|safe}});
-}
+$(document).ready(function() {  
+      var file_name='';  
+      $('#file_upload').uploadify({  
+        'uploader'  : '/upload_script/',//根据文件存放地址改变  
+        'swf' : '/static/js/uploadify/uploadify.swf',
+        //'script'    : '/upload_script/',  
+        'cancelImg' : '/static/js/uploadify/uploadify-cancel.png',//根据文件存放地址改变  
+        'folder'    : '/upload',  
+        'auto'      : true,//false,//  
+        'multi': true,//设置可以上传多个文件  
+        'queueSizeLimit' : 30,  
+        'buttonText':'文件上传',     
+        'removeCompleted':false,//  
+        'fileSizeLimit':10240000,//设置上传文件大小单位kb  
+        'fileTypeExts':'*.txt',//设置上传文件类型为常用文档格式  
+        'fileTypeDesc':'支持文档格式',                  
+        // 'onInit': function () {},  
+        // 'onError' : function (event,ID,fileObj,errorObj) {  
+        //         $('#id_span_msg').html("上传失败，错误码:"+errorObj.type+" "+errorObj.info);  
+        //     },  
+        // 'onSelect': function (e, queueId, fileObj) {  
+        //     $('#id_span_msg').html("");  
+        // },  
+        // 'onCancel'    : function(event,ID,fileObj,data) {  
+        //   $.post("/delete_uploadfile/", { delete_file: file_name } );  
+        //   file_name='';  
+        // },  
+        // 'onComplete': function(event, ID, fileObj, response, data) {  
+        //     var result = eval ("(" + response + ")");  
+        //     file_name=result.save_name;  
+        // }  
+      });  
+    });
 
 $('#selectCompany').multiSelect({
       // afterSelect: function(values){
