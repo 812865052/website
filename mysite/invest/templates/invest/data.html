@@ -224,12 +224,12 @@ $(document).ready(function() {
         'onCancel': function(event,ID,fileObj,data) {  
           $.post("/delete_uploadfile/", { delete_file: file_name } );  
           file_name='';  
-        },  
+        }, 
         'onComplete': function(event, ID, fileObj, response, data) {  
             var result = eval ("(" + response + ")");  
             file_name=result.save_name;  
-        }
-        'onUploadSuccess' : function(file, data, response) {
+        },
+        'onUploadSuccess': function(file, data, response) {
         	alert('The file was saved to: ' + data);
         }
       });  
