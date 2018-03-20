@@ -18,7 +18,7 @@ from db import db_query, insertdate, insertcompany, db_insert, db_delete, db_del
 from .forms import addCompanyData, compareCompany, deleteCompanyData, deleteCompanyidData
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
-static_path = '/home/website/demo/mysite/invest/static/upload'
+static_path = '/home/website/demo/mysite/invest/static/'
 
 def index(request):
     company_list = sharePrice.objects.all()
@@ -268,7 +268,7 @@ def file_upload(filename):
         print 'profile_upload'
         path=os.path.join(static_path,'upload')
         if not os.path.exists(path):
-            os.mkdir(path)
+            os.mkdir(path,0755)
         print path
         #file_name=str(uuid.uuid1())+".jpg"  
         file_name=str(uuid.uuid1())+'-'+filename.name
