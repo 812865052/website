@@ -203,7 +203,7 @@ $(document).ready(function() {
       $('#file_upload').uploadify({  
         // 'uploader'  : '/static/uploadify/uploadify.swf',//根据文件存放地址改变  
         'swf' : '/static/uploadify/uploadify.swf',
-        'script'    : '{% url uploadify_script %}',  
+        'script'    : "{% url 'invest.views.uploadify_script' %}",  
         'cancelImg' : '/static/uploadify/uploadify-cancel.png',//根据文件存放地址改变  
         'folder'    : '/upload',  
         'auto'      : true,//false,//  
