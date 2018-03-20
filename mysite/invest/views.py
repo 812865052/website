@@ -18,6 +18,8 @@ from db import db_query, insertdate, insertcompany, db_insert, db_delete, db_del
 from .forms import addCompanyData, compareCompany, deleteCompanyData, deleteCompanyidData
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
+static_path = '\\home\\website\\demo\\mysite\\invest\\static\\upload'
+
 def index(request):
     company_list = sharePrice.objects.all()
     # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
