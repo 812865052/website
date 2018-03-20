@@ -202,10 +202,10 @@ $(document).ready(function() {
       var file_name='';  
       $('#file_upload').uploadify({  
         // 'uploader'  : '/static/uploadify/uploadify.swf',//根据文件存放地址改变
-        // 'uploader'  : "{% url 'upload_script' %}",//根据文件存放地址改变 
-        'uploader'  : '/invest/upload_script/',//根据文件存放地址改变 
+        'uploader'  : "{% url 'uploadify_script' %}",//根据文件存放地址改变 
+        // 'uploader'  : '/invest/upload_script/',//根据文件存放地址改变 
         'swf' : '/static/uploadify/uploadify.swf',
-        'script'    : '/invest/upload_script/',  
+        // 'script'    : '/invest/upload_script/',  
         'cancelImg' : '/static/uploadify/uploadify-cancel.png',//根据文件存放地址改变  
         'folder'    : '/upload',  
         'auto'      : true,//false,//  
