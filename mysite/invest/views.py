@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-
+import os
+import uuid
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
