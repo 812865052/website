@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^invest/', include('invest.urls')),
     url(r'^polls/', include('polls.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^upload_script/$', invest.views.uploadify_script, name='uploadify_script'),
+    url(r'^delete_uploadfile/$', invest.views.file_delete, name='file_delete'),
 ]

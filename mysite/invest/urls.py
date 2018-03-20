@@ -6,7 +6,7 @@ from . import views
 app_name = 'invest'
 
 urlpatterns = [
-        # ex: /polls/
+        # ex: /invest/
         url(r'^$', views.index, name='index'),
         url(r'^adddb/$', views.adddb, name='adddb'),
         url(r'^compare/$', views.compare, name='compare'),
@@ -14,8 +14,7 @@ urlpatterns = [
         url(r'^insert/$', views.insert, name='insert'),
         url(r'^delete/$', views.delete, name='delete'),
         url(r'^deleteid/$', views.deleteid, name='deleteid'),
-        url(r'^upload_script/$', views.uploadify_script, name='uploadify_script'),
-        url(r'^delete_uploadfile/$', views.file_delete, name='file_delete'),
+        
         # ex: /polls/5/
         #url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
         # ex: /polls/5/results/
