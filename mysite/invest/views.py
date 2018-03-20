@@ -15,6 +15,7 @@ import json
 from django.core import serializers
 from db import db_query, insertdate, insertcompany, db_insert, db_delete, db_deleteid
 from .forms import addCompanyData, compareCompany, deleteCompanyData, deleteCompanyidData
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 def index(request):
     company_list = sharePrice.objects.all()
