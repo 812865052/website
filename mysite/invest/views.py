@@ -216,3 +216,74 @@ def compare(request):
 
     print 'form is not valid'
     return render(request, 'index.html', {'form': form})
+
+def save_uploaded_file(f, filename):
+    destination = open(filename, 'wb')
+    for chunk in f.chunks():
+        destination.write(chunk)
+    destination.close()
+def multiFileUpload(fileContent):
+    addr = str(uuid.uuid3(uuid.NAMESPACE_OID, str(fileContent.name)))
+    path = os.path.join(static_path, addr)
+    if not os.path.exists(path):
+        os.mkdir(path)
+    filename = os.path.join(path, fileContent.name)
+    new_name = filename
+    save_uploaded_file(fileContent, filename)
+
+    return (True,new_name)
+
+    
+@csrf_exempt
+def uploadify_script(request):
+    print 'upload..........'
+    ret="0"  
+    new_name = ''
+    #request.FILES['data']
+    filename = request.FILES.get("Filedata",None)
+    # if request.FILES and request.FILES['Filedata']:
+    #   print request.FILES['Filedata'].name
+    # print 'here'
+    # filename = request.FILES['Filedata'].name
+    print 'filename '+filename.name
+    if filename:
+        result,new_name=file_upload(filename)
+        if result:
+            ret="1"
+        else:
+            ret="2"
+    import json            
+    source={'ret':ret,'save_name':new_name}
+    print source
+    return HttpResponse(json.dumps(source))
+  
+  
+def file_upload(filename):  
+    '''''文件上传函数'''  
+    if filename:
+        print 'profile_upload'
+        path=os.path.join(static_path,'upload')
+        if not os.path.exists(path):
+            os.mkdir(path)
+        print path
+        #file_name=str(uuid.uuid1())+".jpg"  
+        file_name=str(uuid.uuid1())+'-'+filename.name
+        #fname = os.path.join(settings.MEDIA_ROOT,filename)
+        path_file=os.path.join(path,file_name)
+        print file_name
+        print path_file
+        fp = open(path_file, 'wb')
+        for content in filename.chunks():
+            fp.write(content)
+        fp.close()
+        return (True,file_name) #change
+    return (False,file_name)   #change
+  
+#用户管理-添加用户-删除附件  
+ 
+@csrf_exempt
+def file_delete(request):  
+    del_file=request.POST.get("delete_file",'')  
+    if del_file:  
+        path_file=os.path.join(settings.MEDIA_ROOT,'upload',del_file)  
+        os.remove(path_file)
