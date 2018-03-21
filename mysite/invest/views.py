@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 import os
 import uuid
+import excel2json
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
@@ -258,6 +259,7 @@ def uploadify_script(request):
             ret="2"
     import json            
     source={'ret':ret,'save_name':new_name}
+    excel2json.Excel2array(new_name,0)
     print source
     return HttpResponse(json.dumps(source))
   
@@ -284,7 +286,6 @@ def file_upload(filename):
     return (False,file_name)   #change
   
 #用户管理-添加用户-删除附件  
- 
 @csrf_exempt
 def file_delete(request):  
     del_file=request.POST.get("delete_file",'')
