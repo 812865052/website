@@ -169,7 +169,8 @@ def deleteidbatch(request):
             data = []
             table = 'invest_sharePrice'
             path = '/home/website/demo/mysite/db.sqlite3'
-            while(i=9,i<companyid):
+            i = 0
+            while(i<companyid):
                 db_deleteid(path, table, i)
                 i = i + 1
             
