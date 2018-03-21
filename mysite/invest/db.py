@@ -227,7 +227,7 @@ def returndbdate(path,table):
     conn = connect(path)
     cur=conn.cursor()
     t = (table)
-    number = cur.execute("select * from %s order by id" %t) #by id desc 逆序
+    number = cur.execute("select * from %s order by id" %t) #by id desc
     temp = number.fetchall()
     print temp
     i = 0
