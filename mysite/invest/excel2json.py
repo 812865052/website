@@ -11,6 +11,7 @@ import db
 import datetime
 
 dbtable = 'invest_sharePrice'
+dbdatetable = 'invest_datedb'
 dbpath = '/home/website/demo/mysite/db.sqlite3'
 
 
@@ -91,7 +92,7 @@ def Excel2array(file_path, inp):
                 print company[i], date[j], sheet.cell_value(i, j)
                 datesplit = date[j].split('.')
                 db.db_insert(dbpath, dbtable, company[i].encode('ascii','ignore'), datetime.date(int(datesplit[0]),int(datesplit[1]),int(datesplit[2])), sheet.cell_value(i, j))
-                db.datedb_insert(path, table, date)
+                db.datedb_insert(dbpath, dbdatetable, date)
 
 
 

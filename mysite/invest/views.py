@@ -234,9 +234,10 @@ def compare(request):
         month = 2
         day = 8
         table = 'invest_sharePrice'
+        dbdatetable = 'invest_datedb'
         path = '/home/website/demo/mysite/db.sqlite3'
         # insertdate(year,month,day,data,companylist)
-        insertdbdate(data,returndbdate(path,table),companylist)
+        insertdbdate(data,returndbdate(path,dbdatetable),companylist)
         insertcompany(path,data,table,companylist) #insertcompany(path,data,table,companylist)
         company_list = serializers.serialize("json", sharePrice.objects.all())
         
