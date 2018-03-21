@@ -90,7 +90,7 @@ def Excel2array(file_path, inp):
                     continue
                 print company[i], date[j], sheet.cell_value(i, j)
                 datesplit = date[j].split('.')
-                db.db_insert(dbpath, dbtable, company[i].encode('ascii','ignore'), datetime.date(datesplit[0],datesplit[1],datesplit[2]), sheet.cell_value(i, j))
+                db.db_insert(dbpath, dbtable, company[i].encode('ascii','ignore'), datetime.date(int(datesplit[0]),int(datesplit[1]),int(datesplit[2]), sheet.cell_value(i, j))
 
 
 
