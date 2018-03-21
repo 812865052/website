@@ -96,7 +96,7 @@ def Excel2array(file_path, inp):
 def get_data(file_path):
     """获取excel数据源"""
     try:
-        data = xlrd.open_workbook(filepath)
+        data = xlrd.open_workbook(file_path)
         return data
     except Exception, e:
         print u'excel表格读取失败：%s' % e
