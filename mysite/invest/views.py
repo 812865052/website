@@ -287,7 +287,8 @@ def file_upload(filename):
  
 @csrf_exempt
 def file_delete(request):  
-    del_file=request.POST.get("delete_file",'')  
+    del_file=request.POST.get("delete_file",'')
+    print 'in delete file'
     if del_file:  
         path_file=os.path.join(settings.MEDIA_ROOT,'upload',del_file)
         if not os.path.exists(path):
@@ -295,3 +296,5 @@ def file_delete(request):
             os.remove(path_file)
         else:
             print 'file not exists'
+    else:
+        print 'delete file not exists'
