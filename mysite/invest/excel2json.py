@@ -88,7 +88,7 @@ def Excel2array(file_path, inp):
                 if (j==0):
                     continue
                 print company[i], date[j], sheet.cell_value(i, j)
-                db.db_insert(dbpath, dbtable, company[i], date[j], sheet.cell_value(i, j))
+                db.db_insert(dbpath, dbtable, company[i].encode('ascii','ignore'), date[j].encode('ascii','ignore'), sheet.cell_value(i, j))
 
 
 

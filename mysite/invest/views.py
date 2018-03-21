@@ -16,7 +16,7 @@ from django.views import generic
 import json
 from django.core import serializers
 from db import db_query, insertdate, insertcompany, db_insert, db_delete, db_deleteid
-from .forms import addCompanyData, compareCompany, deleteCompanyData, deleteCompanyidData
+from .forms import addCompanyData, compareCompany, deleteCompanyData, deleteCompanyidData, deleteCompanyidbatchData
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 static_path = '/home/website/demo/mysite/invest/static/'
@@ -136,6 +136,43 @@ def deleteid(request):
             table = 'invest_sharePrice'
             path = '/home/website/demo/mysite/db.sqlite3'
             db_deleteid(path, table, companyid)
+            company_list = sharePrice.objects.all()
+            # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
+            data = serializers.serialize("json", company_list)
+            companylist = db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
+            context = {
+                #'company_list': json.dumps(company_list),
+                'company_list': data,
+                'companylist': companylist,
+            }
+            return render(request, 'invest/index.html', context)
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = deleteCompanyidData()
+
+    return render(request, 'invest/index.html', {'form': form})
+
+def deleteidbatch(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = deleteCompanyidbatchData(request.POST)
+        
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            # return HttpResponseRedirect('/index/')
+            companyid = form.cleaned_data['companyidbatch']
+            data = []
+            table = 'invest_sharePrice'
+            path = '/home/website/demo/mysite/db.sqlite3'
+            while(i=9,i<companyid):
+                db_deleteid(path, table, i)
+                i = i + 1
+            
             company_list = sharePrice.objects.all()
             # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
             data = serializers.serialize("json", company_list)

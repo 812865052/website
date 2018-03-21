@@ -13,5 +13,8 @@ class deleteCompanyData(forms.Form):
 class deleteCompanyidData(forms.Form):
     companyid = forms.DecimalField(label='companyid',max_digits=8,decimal_places=0)
 
+class deleteCompanyidbatchData(forms.Form):
+    companyidbatch = forms.DecimalField(label='companyidbatch',max_digits=8,decimal_places=0)
+
 class compareCompany(forms.Form):
 	selectCompany = forms.CharField(label='selectCompany', max_length=100)
