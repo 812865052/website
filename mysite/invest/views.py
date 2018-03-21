@@ -289,5 +289,9 @@ def file_upload(filename):
 def file_delete(request):  
     del_file=request.POST.get("delete_file",'')  
     if del_file:  
-        path_file=os.path.join(settings.MEDIA_ROOT,'upload',del_file)  
-        os.remove(path_file)
+        path_file=os.path.join(settings.MEDIA_ROOT,'upload',del_file)
+        if not os.path.exists(path):
+            print 'file exists' 
+            os.remove(path_file)
+        else:
+            print 'file not exists'

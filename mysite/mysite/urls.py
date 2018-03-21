@@ -21,6 +21,6 @@ urlpatterns = [
     url(r'^invest/', include('invest.urls')),
     url(r'^polls/', include('polls.urls')),
     url(r'^admin/', admin.site.urls),
-    # url(r'^upload_script/$', views.uploadify_script, name='uploadify_script'),
-    # url(r'^delete_uploadfile/$', views.file_delete, name='file_delete'),
+    url(r'^upload_script/$', views.uploadify_script, name='uploadify_script'),
+    url(r'^delete_uploadfile/$', views.file_delete, name='file_delete'),
 ]
