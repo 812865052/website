@@ -235,15 +235,15 @@ def returndbdate(path,table):
         # row = cur.fetchone()
         #print row[1]
         if (temp[i][1] in list):
-            print temp[i][1]
+            print temp[i][1].encode('ascii','ignore')
             print list
             print 'in'
             i = i + 1
         else:
-            print temp[i][1]
+            print temp[i][1].encode('ascii','ignore')
             print list
             print 'not in'
-            list.append(temp[i][1])
+            list.append(temp[i][1]).encode('ascii','ignore')
             i = i + 1
         
     close(cur,conn)
