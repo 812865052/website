@@ -93,7 +93,9 @@ def get_data(file_path):
     print 'get_data'
     filepath = file_path
     try:
-        data1 = xlrd.open_workbook('/home/website/demo/mysite/invest/static/upload/f7719aec-2cb7-11e8-8719-5254008de44b-2.xlsx')
+        s = '//home//website//demo//mysite//invest//static//upload//f7719aec-2cb7-11e8-8719-5254008de44b-2.xlsx'
+        print s
+        data1 = xlrd.open_workbook(s)
         print data1
     except Exception, e:
         print u'excel表格读取失败：%s' % e
