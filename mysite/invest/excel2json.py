@@ -55,8 +55,8 @@ def Excel2Json(file_path):
 def Excel2array(file_path, inp):
     # 打开excel文件
     if get_data(file_path) is not None:
+        book = get_data(file_path)
         #以下是输出sheet页并选择对哪个sheet进行处理
-        # book = get_data(file_path)
         # # 抓取所有sheet页的名称
         # worksheets = book.sheet_names()
         # print "该Excel包含的表单列表为：\n"
