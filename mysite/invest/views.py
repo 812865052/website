@@ -265,7 +265,7 @@ def uploadify_script(request):
 def file_upload(filename):  
     '''''文件上传函数'''  
     if filename:
-        print 'profile_upload'
+        print 'file_upload'
         path=os.path.join(static_path,'upload')
         if not os.path.exists(path):
             os.mkdir(path,0755)
