@@ -197,6 +197,58 @@ def insertcompany(path,data,table,companylist):
     print data
     return data
 
+def datedb_insert(path, table, date):
+    conn = connect(path)
+    cur=conn.cursor()
+    number = cur.execute("select * from %s where date=?" % (table), (date,))
+    temp = number.fetchone()
+    if(temp==None):
+        cur.execute("insert into %s (date) values(?)" % (table), (date,))
+        conn.commit()
+        close(cur,conn)
+        return 'insert ok'
+    else:
+        close(cur,conn)
+        return 'exist already'
+
+def insertdbdate(data,date,companylist):
+    for i in date:
+        dict = {}
+        dict['date'] = i
+        j = 0
+        while(j<len(companylist)):
+            dict[companylist[j]] = 0
+            j = j + 1
+        data.append(dict)
+
+    return data
+
+def returndbdate(path,table):
+    conn = connect(path)
+    cur=conn.cursor()
+    t = (table)
+    number = cur.execute("select * from %s order by id desc" %t)
+    temp = number.fetchall()
+    i = 0
+    list = []
+    while i < len(temp):
+        # row = cur.fetchone()
+        #print row[1]
+        if (temp[i][1] in list):
+            print temp[i][1]
+            print list
+            print 'in'
+            i = i + 1
+        else:
+            print temp[i][1]
+            print list
+            print 'not in'
+            list.append(temp[i][1])
+            i = i + 1
+        
+    close(cur,conn)
+    print list
+    return list
 
 
 if __name__ == '__main__':

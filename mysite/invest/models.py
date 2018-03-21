@@ -14,3 +14,8 @@ class sharePrice(models.Model):
     price = models.FloatField(default=0)
     def __str__(self):
         return self.company
+
+class datedb(models.Model):
+    date = models.DateField('month')
+    def __str__(self):
+        return self.date

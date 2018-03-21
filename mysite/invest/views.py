@@ -15,7 +15,7 @@ from django.urls import reverse
 from django.views import generic
 import json
 from django.core import serializers
-from db import db_query, insertdate, insertcompany, db_insert, db_delete, db_deleteid
+from db import db_query, insertdate, insertcompany, db_insert, db_delete, db_deleteid,returndbdate,insertdbdate
 from .forms import addCompanyData, compareCompany, deleteCompanyData, deleteCompanyidData, deleteCompanyidbatchData
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
@@ -235,7 +235,8 @@ def compare(request):
         day = 8
         table = 'invest_sharePrice'
         path = '/home/website/demo/mysite/db.sqlite3'
-        insertdate(year,month,day,data,companylist)
+        # insertdate(year,month,day,data,companylist)
+        insertdbdate(data,returndbdate(path,table),companylist)
         insertcompany(path,data,table,companylist) #insertcompany(path,data,table,companylist)
         company_list = serializers.serialize("json", sharePrice.objects.all())
         
