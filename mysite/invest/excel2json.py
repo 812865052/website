@@ -7,6 +7,10 @@ import xlrd
 import json
 import codecs
 import os
+import db
+
+dbtable = 'invest_sharePrice'
+dbpath = '/home/website/demo/mysite/db.sqlite3'
 
 
 # 把excel表格中指定sheet转为json
@@ -84,24 +88,14 @@ def Excel2array(file_path, inp):
                 if (j==0):
                     continue
                 print company[i], date[j], sheet.cell_value(i, j)
+                db.db_insert(dbpath, dbtable, company, date, price)
 
 
 
 
 def get_data(file_path):
     """获取excel数据源"""
-    print 'get_data'
-    filepath = file_path
     try:
-        s = '//home//website//demo//mysite//invest//static//upload//f7719aec-2cb7-11e8-8719-5254008de44b-2.xlsx'
-        print s
-        data1 = xlrd.open_workbook(s)
-        print data1
-    except Exception, e:
-        print u'excel表格读取失败：%s' % e
-        return None
-    try:
-        print filepath
         data = xlrd.open_workbook(filepath)
         return data
     except Exception, e:
