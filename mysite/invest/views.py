@@ -277,7 +277,7 @@ def file_upload(filename):
         path_file=os.path.join(path,file_name)
         print file_name
         print path_file
-        excel2json.Excel2array(path_file,0)
+        excel2json.Excel2array(path_file.encode('ascii','ignore'),0)
         fp = open(path_file, 'wb')
         for content in filename.chunks():
             fp.write(content)
