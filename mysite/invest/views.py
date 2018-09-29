@@ -19,7 +19,6 @@ from db import db_query, insertdate, insertcompany, db_insert, db_delete, db_del
 from .forms import addCompanyData, compareCompany, deleteCompanyData, deleteCompanyidData, deleteCompanyidbatchData
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
-#test
 static_path = '/home/website/demo/mysite/invest/static/'
 
 def index(request):
