@@ -19,14 +19,13 @@ from db import db_query, insertdate, insertcompany, db_insert, db_delete, db_del
 from .forms import addCompanyData, compareCompany, deleteCompanyData, deleteCompanyidData, deleteCompanyidbatchData
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
-##test
-static_path = '/home/website/demo/mysite/invest/static/'
+static_path = '/home/website/website/mysite/invest/static/'
 
 def index(request):
     company_list = sharePrice.objects.all()
     # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
     data = serializers.serialize("json", company_list)
-    companylist = db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
+    companylist = db_query('/home/website/website/mysite/db.sqlite3', 'invest_sharePrice', "*")
     print companylist
     print 'index'
     context = {
@@ -40,7 +39,7 @@ def dataoperation(request):
     company_list = sharePrice.objects.all()
     # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
     data = serializers.serialize("json", company_list)
-    companylist = db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
+    companylist = db_query('/home/website/website/mysite/db.sqlite3', 'invest_sharePrice', "*")
     context = {
         #'company_list': json.dumps(company_list),
         'company_list': data,
@@ -65,12 +64,12 @@ def insert(request):
             price = form.cleaned_data['companyprice']
             data = []
             table = 'invest_sharePrice'
-            path = '/home/website/demo/mysite/db.sqlite3'
+            path = '/home/website/website/mysite/db.sqlite3'
             db_insert(path, table, company, date, price)
             company_list = sharePrice.objects.all()
             # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
             data = serializers.serialize("json", company_list)
-            companylist = db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
+            companylist = db_query('/home/website/website/mysite/db.sqlite3', 'invest_sharePrice', "*")
             context = {
                 #'company_list': json.dumps(company_list),
                 'company_list': data,
@@ -101,12 +100,12 @@ def delete(request):
             date = form.cleaned_data['date']
             data = []
             table = 'invest_sharePrice'
-            path = '/home/website/demo/mysite/db.sqlite3'
+            path = '/home/website/website/mysite/db.sqlite3'
             db_delete(path, table, company, date)
             company_list = sharePrice.objects.all()
             # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
             data = serializers.serialize("json", company_list)
-            companylist = db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
+            companylist = db_query('/home/website/website/mysite/db.sqlite3', 'invest_sharePrice', "*")
             context = {
                 #'company_list': json.dumps(company_list),
                 'company_list': data,
@@ -135,12 +134,12 @@ def deleteid(request):
             companyid = form.cleaned_data['companyid']
             data = []
             table = 'invest_sharePrice'
-            path = '/home/website/demo/mysite/db.sqlite3'
+            path = '/home/website/website/mysite/db.sqlite3'
             db_deleteid(path, table, companyid)
             company_list = sharePrice.objects.all()
             # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
             data = serializers.serialize("json", company_list)
-            companylist = db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
+            companylist = db_query('/home/website/website/mysite/db.sqlite3', 'invest_sharePrice', "*")
             context = {
                 #'company_list': json.dumps(company_list),
                 'company_list': data,
@@ -169,7 +168,7 @@ def deleteidbatch(request):
             companyid = form.cleaned_data['companyidbatch']
             data = []
             table = 'invest_sharePrice'
-            path = '/home/website/demo/mysite/db.sqlite3'
+            path = '/home/website/website/mysite/db.sqlite3'
             i = 0
             while(i<companyid):
                 db_deleteid(path, table, i)
@@ -178,7 +177,7 @@ def deleteidbatch(request):
             company_list = sharePrice.objects.all()
             # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
             data = serializers.serialize("json", company_list)
-            companylist = db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
+            companylist = db_query('/home/website/website/mysite/db.sqlite3', 'invest_sharePrice', "*")
             context = {
                 #'company_list': json.dumps(company_list),
                 'company_list': data,
@@ -236,7 +235,7 @@ def compare(request):
         day = 8
         table = 'invest_sharePrice'
         dbdatetable = 'invest_datedb'
-        path = '/home/website/demo/mysite/db.sqlite3'
+        path = '/home/website/website/mysite/db.sqlite3'
         # insertdate(year,month,day,data,companylist)
         insertdbdate(data,returndbdate(path,dbdatetable),companylist)
         insertcompany(path,data,table,companylist) #insertcompany(path,data,table,companylist)
