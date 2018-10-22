@@ -12,7 +12,7 @@ import datetime
 
 dbtable = 'invest_sharePrice'
 dbdatetable = 'invest_datedb'
-dbpath = '/home/website/demo/mysite/db.sqlite3'
+dbpath = '/home/website/website/mysite/db.sqlite3'
 
 
 # 把excel表格中指定sheet转为json
