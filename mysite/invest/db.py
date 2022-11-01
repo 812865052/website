@@ -130,22 +130,22 @@ def db_queryprice(path, table, company, date):
     return temp[2]
 
 
-def compareData(path, table, company):
-    conn = connect(path)
-    cur=conn.cursor()
-    t = (kind,table)
-    number = cur.execute("select %s from %s order by id desc" %t)
-    temp = number.fetchall()
-    i = 0
-    list = []
-    while i < len(temp):
-        # row = cur.fetchone()
-        #print row[1]
-        list.append(temp[i][1])
-        i = i + 1
-    close(cur,conn)
-    print(list)
-    return list
+# def compareData(path, table, company):
+#     conn = connect(path)
+#     cur=conn.cursor()
+#     t = (kind,table)
+#     number = cur.execute("select %s from %s order by id desc" %t)
+#     temp = number.fetchall()
+#     i = 0
+#     list = []
+#     while i < len(temp):
+#         # row = cur.fetchone()
+#         #print row[1]
+#         list.append(temp[i][1])
+#         i = i + 1
+#     close(cur,conn)
+#     print(list)
+#     return list
 
  
 def openDb(sql, connection_name='default'):
@@ -157,19 +157,19 @@ def openDb(sql, connection_name='default'):
     cursor.close()
     return results
 
-def filterCompany(request):
-    company_list = sharePrice.objects.all()
-    # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
-    data = serializers.serialize("json", company_list)
-    companlist = []
-    for i in data:
-        if(i.fields.company in companylist == false):
-            datalist.push(i.fields.company)
-    context = {
-        #'company_list': json.dumps(company_list),
-        'company_list': data,
-    }
-    return render(request, 'invest/index.html', context)
+# def filterCompany(request):
+#     company_list = sharePrice.objects.all()
+#     # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
+#     data = serializers.serialize("json", company_list)
+#     companlist = []
+#     for i in data:
+#         if(i.fields.company in company_list == False):
+#             datalist.push(i.fields.company)
+#     context = {
+#         #'company_list': json.dumps(company_list),
+#         'company_list': data,
+#     }
+#     return render(request, 'invest/index.html', context)
 
 
 def insertdate(year,month,day,data,companylist):
