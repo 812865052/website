@@ -253,4 +253,4 @@ def returndbdate(path,table):
 
 
 if __name__ == '__main__':
-    db_query('/home/website/demo/mysite/db.sqlite3', 'invest_sharePrice', "*")
+    db_query('/Users/yefei/Documents/shopee/Python/website/mysite/db.sqlite3', 'invest_sharePrice', "*")
