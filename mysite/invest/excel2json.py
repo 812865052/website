@@ -7,7 +7,7 @@ import xlrd
 import json
 import codecs
 import os
-import db
+from . import db
 import datetime
 
 dbtable = 'invest_sharePrice'
@@ -22,7 +22,7 @@ def Excel2Json(file_path):
         book = get_data(file_path)
         # 抓取所有sheet页的名称
         worksheets = book.sheet_names()
-        print "该Excel包含的表单列表为：\n"
+        print("该Excel包含的表单列表为：\n")
         for sheet in worksheets:
             print ('%s,%s' % (worksheets.index(sheet), sheet))
         inp = raw_input(u'请输入表单名对应的编号，对应表单将自动转为json:\n')
@@ -51,7 +51,7 @@ def Excel2Json(file_path):
         json_data = json.dumps(result, indent=4, sort_keys=True).decode('unicode_escape')
 
         saveFile(os.getcwd(), worksheets[int(inp)], json_data)
-        print json_data
+        print(json_data)
 
 
         # 获取excel数据源
@@ -89,7 +89,7 @@ def Excel2array(file_path, inp):
             for j in range(ncols):
                 if (j==0):
                     continue
-                print company[i], date[j], sheet.cell_value(i, j)
+                print(company[i], date[j], sheet.cell_value(i, j))
                 datesplit = date[j].split('.')
                 db.db_insert(dbpath, dbtable, company[i].encode('ascii','ignore'), datetime.date(int(datesplit[0]),int(datesplit[1]),int(datesplit[2])), sheet.cell_value(i, j))
                 db.datedb_insert(dbpath, dbdatetable, datetime.date(int(datesplit[0]),int(datesplit[1]),int(datesplit[2])))
@@ -102,8 +102,8 @@ def get_data(file_path):
     try:
         data = xlrd.open_workbook(file_path)
         return data
-    except Exception, e:
-        print u'excel表格读取失败：%s' % e
+    except Exception as e:
+        print(u'excel表格读取失败：%s' % e)
         return None
 
 

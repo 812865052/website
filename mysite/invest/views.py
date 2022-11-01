@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import sqlite3
 
 from django.shortcuts import render
 import os
 import uuid
-import excel2json
+from . import excel2json
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
@@ -15,19 +16,20 @@ from django.urls import reverse
 from django.views import generic
 import json
 from django.core import serializers
-from db import db_query, insertdate, insertcompany, db_insert, db_delete, db_deleteid,returndbdate,insertdbdate
+from .db import db_query, insertdate, insertcompany, db_insert, db_delete, db_deleteid,returndbdate,insertdbdate
 from .forms import addCompanyData, compareCompany, deleteCompanyData, deleteCompanyidData, deleteCompanyidbatchData
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
-static_path = '/home/website/website/mysite/invest/static/'
+static_path = '/Users/yefei/Documents/shopee/Python/website/mysite/polls/static'
+sqlite3_path =  '/Users/yefei/Documents/shopee/Python/website/mysite/db.sqlite3'
 
 def index(request):
     company_list = sharePrice.objects.all()
     # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
     data = serializers.serialize("json", company_list)
-    companylist = db_query('/home/website/website/mysite/db.sqlite3', 'invest_sharePrice', "*")
-    print companylist
-    print 'index'
+    companylist = db_query(sqlite3_path, 'invest_sharePrice', "*")
+    print(companylist)
+    print('index')
     context = {
         #'company_list': json.dumps(company_list),
         'company_list': data,
@@ -39,7 +41,7 @@ def dataoperation(request):
     company_list = sharePrice.objects.all()
     # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
     data = serializers.serialize("json", company_list)
-    companylist = db_query('/home/website/website/mysite/db.sqlite3', 'invest_sharePrice', "*")
+    companylist = db_query(sqlite3_path, 'invest_sharePrice', "*")
     context = {
         #'company_list': json.dumps(company_list),
         'company_list': data,
@@ -64,12 +66,12 @@ def insert(request):
             price = form.cleaned_data['companyprice']
             data = []
             table = 'invest_sharePrice'
-            path = '/home/website/website/mysite/db.sqlite3'
+            path = sqlite3_path
             db_insert(path, table, company, date, price)
             company_list = sharePrice.objects.all()
             # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
             data = serializers.serialize("json", company_list)
-            companylist = db_query('/home/website/website/mysite/db.sqlite3', 'invest_sharePrice', "*")
+            companylist = db_query(sqlite3_path, 'invest_sharePrice', "*")
             context = {
                 #'company_list': json.dumps(company_list),
                 'company_list': data,
@@ -100,12 +102,12 @@ def delete(request):
             date = form.cleaned_data['date']
             data = []
             table = 'invest_sharePrice'
-            path = '/home/website/website/mysite/db.sqlite3'
+            path = sqlite3_path
             db_delete(path, table, company, date)
             company_list = sharePrice.objects.all()
             # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
             data = serializers.serialize("json", company_list)
-            companylist = db_query('/home/website/website/mysite/db.sqlite3', 'invest_sharePrice', "*")
+            companylist = db_query(sqlite3_path, 'invest_sharePrice', "*")
             context = {
                 #'company_list': json.dumps(company_list),
                 'company_list': data,
@@ -134,12 +136,12 @@ def deleteid(request):
             companyid = form.cleaned_data['companyid']
             data = []
             table = 'invest_sharePrice'
-            path = '/home/website/website/mysite/db.sqlite3'
+            path = sqlite3_path
             db_deleteid(path, table, companyid)
             company_list = sharePrice.objects.all()
             # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
             data = serializers.serialize("json", company_list)
-            companylist = db_query('/home/website/website/mysite/db.sqlite3', 'invest_sharePrice', "*")
+            companylist = db_query(sqlite3_path, 'invest_sharePrice', "*")
             context = {
                 #'company_list': json.dumps(company_list),
                 'company_list': data,
@@ -168,7 +170,7 @@ def deleteidbatch(request):
             companyid = form.cleaned_data['companyidbatch']
             data = []
             table = 'invest_sharePrice'
-            path = '/home/website/website/mysite/db.sqlite3'
+            path = sqlite3_path
             i = 0
             while(i<companyid):
                 db_deleteid(path, table, i)
@@ -177,7 +179,7 @@ def deleteidbatch(request):
             company_list = sharePrice.objects.all()
             # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
             data = serializers.serialize("json", company_list)
-            companylist = db_query('/home/website/website/mysite/db.sqlite3', 'invest_sharePrice', "*")
+            companylist = db_query(sqlite3_path, 'invest_sharePrice', "*")
             context = {
                 #'company_list': json.dumps(company_list),
                 'company_list': data,
@@ -222,20 +224,20 @@ def compare(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = compareCompany(request.POST)
-        print request.POST.getlist('selectCompany')
+        print(request.POST.getlist('selectCompany'))
         unicodelist = request.POST.getlist('selectCompany')
-        print unicodelist
+        print(unicodelist)
         companylist = []
         for i in unicodelist:
             companylist.append(i.encode('ascii','ignore'))
-        print companylist
+        print(companylist)
         data = []
         year = 2017
         month = 2
         day = 8
         table = 'invest_sharePrice'
         dbdatetable = 'invest_datedb'
-        path = '/home/website/website/mysite/db.sqlite3'
+        path = sqlite3_path
         # insertdate(year,month,day,data,companylist)
         insertdbdate(data,returndbdate(path,dbdatetable),companylist)
         insertcompany(path,data,table,companylist) #insertcompany(path,data,table,companylist)
@@ -247,7 +249,7 @@ def compare(request):
             # ...
             # redirect to a new URL:
             # return HttpResponseRedirect('/index/')
-            print 'chart html'
+            print('chart html')
             context = {
                 'data': data,
                 'companylist': companylist,
@@ -259,7 +261,7 @@ def compare(request):
     else:
         form = compareCompany()
 
-    print 'form is not valid'
+    print('form is not valid')
     return render(request, 'index.html', {'form': form})
 
 def save_uploaded_file(f, filename):
@@ -281,7 +283,7 @@ def multiFileUpload(fileContent):
     
 @csrf_exempt
 def uploadify_script(request):
-    print 'upload..........'
+    print('upload..........')
     ret="0"  
     new_name = ''
     #request.FILES['data']
@@ -290,7 +292,7 @@ def uploadify_script(request):
     #   print request.FILES['Filedata'].name
     # print 'here'
     # filename = request.FILES['Filedata'].name
-    print 'filename '+filename.name
+    print('filename '+filename.name)
     if filename:
         result,new_name=file_upload(filename)
         if result:
@@ -299,24 +301,24 @@ def uploadify_script(request):
             ret="2"
     import json            
     source={'ret':ret,'save_name':new_name}
-    print source
+    print(source)
     return HttpResponse(json.dumps(source))
   
   
 def file_upload(filename):  
     '''''文件上传函数'''  
     if filename:
-        print 'file_upload'
+        print('file_upload')
         path=os.path.join(static_path,'upload')
         if not os.path.exists(path):
-            os.mkdir(path,0755)
-        print path
+            os.mkdir(path,755)
+        print(path)
         #file_name=str(uuid.uuid1())+".jpg"  
         file_name=str(uuid.uuid1())+'-'+filename.name
         #fname = os.path.join(settings.MEDIA_ROOT,filename)
         path_file=os.path.join(path,file_name)
-        print file_name
-        print path_file
+        print(file_name)
+        print(path_file)
         fp = open(path_file, 'wb')
         for content in filename.chunks():
             fp.write(content)
@@ -329,13 +331,13 @@ def file_upload(filename):
 @csrf_exempt
 def file_delete(request):  
     del_file=request.POST.get("delete_file",'')
-    print 'in delete file'
+    print('in delete file')
     if del_file:  
         path_file=os.path.join(settings.MEDIA_ROOT,'upload',del_file)
         if not os.path.exists(path):
-            print 'file exists' 
+            print('file exists')
             os.remove(path_file)
         else:
-            print 'file not exists'
+            print('file not exists')
     else:
-        print 'delete file not exists'
+        print('delete file not exists')
