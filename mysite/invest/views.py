@@ -22,7 +22,7 @@ from .forms import addCompanyData, compareCompany, deleteCompanyData, deleteComp
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
 static_path = '/Users/yefei/Documents/shopee/Python/website/mysite/polls/static'
-sqlite3_path =  '/Users/yefei/Documents/shopee/Python/website/mysite/db.sqlite3'
+sqlite3_path = '/Users/yefei/Documents/shopee/Python/website/mysite/db.sqlite3'
 
 def index(request):
     company_list = sharePrice.objects.all()

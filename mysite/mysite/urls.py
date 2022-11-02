@@ -23,4 +23,12 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^upload_script/$', views.uploadify_script, name='uploadify_script'),
     url(r'^delete_uploadfile/$', views.file_delete, name='file_delete'),
+    # 如果执行python manage.py makemigrations snippets报django.db.utils.OperationalError: no such table: snippets_snippet
+    # 需要把下面这行注销，原因未知，因为看报错信息发现是这里有问题
+    url(r'^snippets/', include('snippets.urls')),
+]
+
+urlpatterns += [
+    url(r'^api-auth/', include('rest_framework.urls',
+                               namespace='rest_framework')),
 ]
