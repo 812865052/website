@@ -6,6 +6,7 @@ from django.shortcuts import render
 import os
 import uuid
 from . import excel2json
+from django.conf import settings
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
@@ -16,7 +17,7 @@ from django.urls import reverse
 from django.views import generic
 import json
 from django.core import serializers
-from .db import db_query, insertdate, insertcompany, db_insert, db_delete, db_deleteid,returndbdate,insertdbdate
+from .db import db_query, insertdate, insertcompany, db_insert, db_delete, db_deleteid,returndbdate,insertdbdate,date_db_insert
 from .forms import addCompanyData, compareCompany, deleteCompanyData, deleteCompanyidData, deleteCompanyidbatchData
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
@@ -25,11 +26,13 @@ sqlite3_path =  '/Users/yefei/Documents/shopee/Python/website/mysite/db.sqlite3'
 
 def index(request):
     company_list = sharePrice.objects.all()
+    print(f"all company_list:{company_list}")
     # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
     data = serializers.serialize("json", company_list)
+    print(f"all json company_list:{data}")
     companylist = db_query(sqlite3_path, 'invest_sharePrice', "*")
-    print(companylist)
-    print('index')
+    print(f"companylist:{companylist}")
+    print('index 方法')
     context = {
         #'company_list': json.dumps(company_list),
         'company_list': data,
@@ -38,6 +41,7 @@ def index(request):
     return render(request, 'invest/index.html', context)
 
 def dataoperation(request):
+    print("dataoperation 方法")
     company_list = sharePrice.objects.all()
     # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
     data = serializers.serialize("json", company_list)
@@ -50,6 +54,7 @@ def dataoperation(request):
     return render(request, 'invest/data.html', context)
 
 def insert(request):
+    print("insert 方法")
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -66,8 +71,10 @@ def insert(request):
             price = form.cleaned_data['companyprice']
             data = []
             table = 'invest_sharePrice'
+            dbdatetable = 'invest_datedb'
             path = sqlite3_path
             db_insert(path, table, company, date, price)
+            date_db_insert(path, dbdatetable, date)
             company_list = sharePrice.objects.all()
             # time.strftime('%Y-%m-%d', time.strptime("30 Nov 17", "%d %b %y"))
             data = serializers.serialize("json", company_list)
@@ -87,6 +94,7 @@ def insert(request):
 
 
 def delete(request):
+    print("delete 方法")
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -122,6 +130,7 @@ def delete(request):
     return render(request, 'invest/index.html', {'form': form})
 
 def deleteid(request):
+    print("deleteid 方法")
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -156,6 +165,7 @@ def deleteid(request):
     return render(request, 'invest/index.html', {'form': form})
 
 def deleteidbatch(request):
+    print("deleteidbatch 方法")
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -201,6 +211,7 @@ def deleteidbatch(request):
 #     return render(request, 'invest/index.html', context)
 
 def adddb(request):
+    print("adddb 方法")
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -220,17 +231,15 @@ def adddb(request):
 
 
 def compare(request):
+    print("compare 方法")
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = compareCompany(request.POST)
-        print(request.POST.getlist('selectCompany'))
-        unicodelist = request.POST.getlist('selectCompany')
-        print(unicodelist)
-        companylist = []
-        for i in unicodelist:
-            companylist.append(i.encode('ascii','ignore'))
-        print(companylist)
+        print(f"选择的公司：{request.POST.getlist('selectCompany')}")
+        print(f"提交的数据：{request.POST}")
+        selectCompany = request.POST.getlist('selectCompany')
+        
         data = []
         year = 2017
         month = 2
@@ -239,8 +248,8 @@ def compare(request):
         dbdatetable = 'invest_datedb'
         path = sqlite3_path
         # insertdate(year,month,day,data,companylist)
-        insertdbdate(data,returndbdate(path,dbdatetable),companylist)
-        insertcompany(path,data,table,companylist) #insertcompany(path,data,table,companylist)
+        insertdbdate(data,returndbdate(path,dbdatetable),selectCompany)
+        insertcompany(path,data,table,selectCompany) #insertcompany(path,data,table,companylist)
         company_list = serializers.serialize("json", sharePrice.objects.all())
         
         # check whether it's valid:
@@ -252,7 +261,7 @@ def compare(request):
             print('chart html')
             context = {
                 'data': data,
-                'companylist': companylist,
+                'companylist': selectCompany,
                 'company_list':company_list,
             }
             return render(request, 'invest/chart.html', context)
@@ -265,11 +274,13 @@ def compare(request):
     return render(request, 'index.html', {'form': form})
 
 def save_uploaded_file(f, filename):
+    print("save_uploaded_file 方法")
     destination = open(filename, 'wb')
     for chunk in f.chunks():
         destination.write(chunk)
     destination.close()
 def multiFileUpload(fileContent):
+    print("multiFileUpload 方法")
     addr = str(uuid.uuid3(uuid.NAMESPACE_OID, str(fileContent.name)))
     path = os.path.join(static_path, addr)
     if not os.path.exists(path):
@@ -283,6 +294,7 @@ def multiFileUpload(fileContent):
     
 @csrf_exempt
 def uploadify_script(request):
+    print("uploadify_script 方法")
     print('upload..........')
     ret="0"  
     new_name = ''
@@ -305,7 +317,8 @@ def uploadify_script(request):
     return HttpResponse(json.dumps(source))
   
   
-def file_upload(filename):  
+def file_upload(filename):
+    print("file_upload 方法")
     '''''文件上传函数'''  
     if filename:
         print('file_upload')
@@ -329,7 +342,8 @@ def file_upload(filename):
   
 #用户管理-添加用户-删除附件  
 @csrf_exempt
-def file_delete(request):  
+def file_delete(request): 
+    print("file_delete 方法") 
     del_file=request.POST.get("delete_file",'')
     print('in delete file')
     if del_file:  

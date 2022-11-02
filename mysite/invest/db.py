@@ -44,6 +44,23 @@ def db_insert(path, table, company, date, price):
     elif(temp[2]!=price):
         close(cur,conn)
         db_update(path, table, company, date, price)
+        
+        
+def date_db_insert(path, table, date):
+    conn = connect(path)
+    cur=conn.cursor()
+    number = cur.execute(f'select * from {table} where date="{date}"')
+    temp = number.fetchone()
+    if(temp==None):
+        cur.execute(f'insert into {table} (date) values("{date}")')
+        conn.commit()
+        close(cur,conn)
+        print("插入dbdate表成功")
+        return 'insert ok'
+    else:
+        close(cur,conn)
+        print("插入dbdate表失败，已有该日期")
+        return 'exist already'
 
 def db_delete(path, table, company, date):
     conn = connect(path)
@@ -95,22 +112,11 @@ def db_query(path, table, kind):
     t = (kind,table)
     number = cur.execute("select %s from %s order by id desc" %t)
     temp = number.fetchall()
-    i = 0
+    print(f"查出的数据：{temp}")
     list = []
-    while i < len(temp):
-        # row = cur.fetchone()
-        #print row[1]
-        if (temp[i][1] in list):
-            print(temp[i][1].encode('ascii','ignore'))
-            print(list)
-            print('in')
-            i = i + 1
-        else:
-            print(temp[i][1].encode('ascii','ignore'))
-            print(list)
-            print('not in')
-            list.append(temp[i][1].encode('ascii','ignore'))
-            i = i + 1
+    for row in temp:
+        if row[1] not in list:
+            list.append(row[1])
         
     close(cur,conn)
     print(list)
@@ -120,6 +126,7 @@ def db_queryprice(path, table, company, date):
     conn = connect(path)
     cur=conn.cursor()
     t = (table,company, date)
+    print(t)
     number = cur.execute("select * from %s where company=? and date=?" % (table), (company,date,))
     temp = number.fetchone()
     if(temp==None):
@@ -194,21 +201,24 @@ def insertcompany(path,data,table,companylist):
         for company in companylist:
             # db_queryprice(path, table, company, date)
             i[company] = db_queryprice(path, table, company, i['date'])
-    print(data)
+    print(f"data:{data}")
     return data
 
 def datedb_insert(path, table, date):
     conn = connect(path)
     cur=conn.cursor()
     number = cur.execute("select * from %s where date=?" % (table), (date,))
+    print(f"日期：{number}")
     temp = number.fetchone()
     if(temp==None):
         cur.execute("insert into %s (date) values(?)" % (table), (date,))
         conn.commit()
         close(cur,conn)
+        print(f"insert ok")
         return 'insert ok'
     else:
         close(cur,conn)
+        print(f"exist already")
         return 'exist already'
 
 def insertdbdate(data,date,companylist):
@@ -229,26 +239,14 @@ def returndbdate(path,table):
     t = (table)
     number = cur.execute("select * from %s order by id" %t) #by id desc
     temp = number.fetchall()
-    print(temp)
-    i = 0
+    print(f"returndbdate:{temp}")
     list = []
-    while i < len(temp):
-        # row = cur.fetchone()
-        #print row[1]
-        if (temp[i][1] in list):
-            print(temp[i][1])
-            print(list)
-            print('in')
-            i = i + 1
-        else:
-            print(temp[i][1])
-            print(list)
-            print('not in')
-            list.append(temp[i][1].encode('ascii','ignore'))
-            i = i + 1
+    for i in temp:
+        if i[1] not in list:
+            list.append(i[1])
         
     close(cur,conn)
-    print(list)
+    print(f"returndbdate:{list}")
     return list
 
 
