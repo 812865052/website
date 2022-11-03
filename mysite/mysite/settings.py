@@ -124,3 +124,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # super user:yefei password:ye123456 email:yefei@shopee.com
+
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10
+}

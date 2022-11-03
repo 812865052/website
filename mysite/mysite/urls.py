@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from invest import views
+from snippets import views as snippets_views
 
 urlpatterns = [
     url(r'^invest/', include('invest.urls')),
@@ -25,10 +26,6 @@ urlpatterns = [
     url(r'^delete_uploadfile/$', views.file_delete, name='file_delete'),
     # 如果执行python manage.py makemigrations snippets报django.db.utils.OperationalError: no such table: snippets_snippet
     # 需要把下面这行注销，原因未知，因为看报错信息发现是这里有问题
-    url(r'^snippets/', include('snippets.urls')),
-]
-
-urlpatterns += [
-    url(r'^api-auth/', include('rest_framework.urls',
-                               namespace='rest_framework')),
+    # url(r'^snippets/', include('snippets.urls')),
+    url(r'^', include('snippets.urls')),
 ]
