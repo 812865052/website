@@ -16,7 +16,6 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from invest import views
-from snippets import views as snippets_views
 
 urlpatterns = [
     url(r'^invest/', include('invest.urls')),
