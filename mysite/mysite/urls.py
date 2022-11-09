@@ -27,6 +27,7 @@ urlpatterns = [
     # 需要把下面这行注销，原因未知，因为看报错信息发现是这里有问题
     # url(r'^snippets/', include('snippets.urls')),
     url(r'^', include('snippets.urls')),
+    url(r'^v1/', include('blog.urls')),
 ]
 
 urlpatterns += [
