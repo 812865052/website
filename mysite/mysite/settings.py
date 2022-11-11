@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'snippets.apps.SnippetsConfig',
     'blog.apps.BlogConfig',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -128,5 +129,7 @@ STATIC_URL = '/static/'
 
 
 REST_FRAMEWORK = {
-    'PAGE_SIZE': 10
+    'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 2,
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }

@@ -6,6 +6,7 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'articles', viewset=views.ArticleViewSet)
+router.register(r'users', viewset=views.UserViewSet)
 
 urlpatterns = [
     # re_path(r'^articles/$', views.ArticleList.as_view()),
